@@ -1,10 +1,15 @@
 import { useEffect, useId, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Eye, EyeOff, UserRound } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import wallpaper from './media/wallpaper.png';
 
 const IMAGES = {
-  loginHero: wallpaper,
+  defaultHeroSlides: [
+    wallpaper,
+    'https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1600&q=80',
+    'https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=1600&q=80',
+  ],
 };
 
 const roles = [
@@ -14,8 +19,11 @@ const roles = [
 ];
 
 export default function Login() {
+  const navigate = useNavigate();
   const [role, setRole] = useState('student');
   const [showPassword, setShowPassword] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [heroSlides, setHeroSlides] = useState(IMAGES.defaultHeroSlides);
   const emailId = useId();
   const passwordId = useId();
   const [schoolName, setSchoolName] = useState('School Name');
@@ -27,11 +35,28 @@ export default function Login() {
       .then((data) => {
         if (data.schoolName) setSchoolName(data.schoolName);
         if (data.schoolLogo) setSchoolLogo(data.schoolLogo);
+        if (Array.isArray(data.heroSlides) && data.heroSlides.length > 0) {
+          setHeroSlides(data.heroSlides);
+        }
       })
       .catch((error) => {
         console.error('Error fetching school data:', error);
       });
   }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, [heroSlides]);
+
+  useEffect(() => {
+    if (activeSlide >= heroSlides.length) {
+      setActiveSlide(0);
+    }
+  }, [activeSlide, heroSlides]);
 
   return (
     <div className="login">
@@ -65,7 +90,13 @@ export default function Login() {
             <h1 className="login__title">Login to your account</h1>
             <p className="login__subtitle">Welcome back!</p>
 
-            <form className="login__form" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="login__form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                navigate('/dashboard');
+              }}
+            >
               <div className="login__field">
                 <label className="visually-hidden" htmlFor={emailId}>
                   Email
@@ -124,7 +155,7 @@ export default function Login() {
 
         <aside className="login__hero" aria-label="Welcome">
           <div className="login__hero-media">
-            <img className="login__hero-img" src={IMAGES.loginHero} alt="" />
+            <img className="login__hero-img" src={heroSlides[activeSlide]} alt="" />
             <div className="login__hero-scrim" />
           </div>
 
@@ -139,9 +170,12 @@ export default function Login() {
             <div className="login__hero-slide">
               <p className="login__hero-tagline">Streamlining Education, Empowering Every Role.</p>
               <div className="login__hero-dots" aria-hidden>
-                <span className="login__hero-dot" />
-                <span className="login__hero-dot login__hero-dot--active" />
-                <span className="login__hero-dot" />
+                {heroSlides.map((slide, index) => (
+                  <span
+                    key={slide}
+                    className={`login__hero-dot${index === activeSlide ? ' login__hero-dot--active' : ''}`}
+                  />
+                ))}
               </div>
             </div>
           </div>

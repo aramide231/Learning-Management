@@ -1,0 +1,176 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  min-height: 100vh;
+  padding: 20px 14px;
+  border-right: 1px solid #eceef1;
+  background: #ffffff;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.sidebar__brand {
+  margin-bottom: 16px;
+}
+
+.sidebar__logo {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 800;
+  color: #111827;
+}
+
+.sidebar__tm {
+  margin-left: 2px;
+  font-size: 11px;
+  vertical-align: top;
+}
+
+.sidebar__school-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e6e9ed;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: #fafbfc;
+}
+
+.sidebar__school-thumb {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #e5e7eb;
+}
+
+.sidebar__school-text p {
+  margin: 0;
+}
+
+.sidebar__school-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.sidebar__school-class {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #edf0f3;
+}
+
+.sidebar__section {
+  padding: 14px 0 12px;
+  border-top: 1px solid #edf0f3;
+}
+
+.sidebar__section:last-of-type {
+  padding-bottom: 0;
+}
+
+.sidebar__section-trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sidebar__section-title {
+  margin: 0 0 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  text-align: left;
+}
+
+.sidebar__section-caret {
+  color: #b3bac4;
+  transform: rotate(-90deg);
+  transition: transform 0.15s ease;
+}
+
+.sidebar__section-caret--open {
+  transform: rotate(0deg);
+}
+
+.sidebar__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar__item {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  font: inherit;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.sidebar__item:hover {
+  background: #f3f4f6;
+}
+
+.sidebar__item--active {
+  background: #e8eaed;
+  color: #111827;
+  font-weight: 600;
+}
+
+.sidebar__item-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar__dot {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+.sidebar__badge {
+  margin-left: auto;
+  font-size: 10px;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+}
