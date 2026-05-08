@@ -1,48 +1,37 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import './Sidebar.css';
-import dashboardIcon from './media/_dashboard.png';
-import mySubjectsIcon from './media/mySubject.png';
-import assignmentIcon from './media/assignment.png';
-import gradesIcon from './media/Grades.png';
-import resourcesIcon from './media/rescources.png';
-import chatRoomIcon from './media/chatRoom.png';
-import aiTutorIcon from './media/AiTutor.png';
-import feePaymentIcon from './media/feePayment.png';
-import supportIcon from './media/Support.png';
-import settingsIcon from './media/settings (2).png';
-import logoutIcon from './media/logout.png';
 
 const defaultSections = [
   {
     title: 'Main Menu',
     items: [
-      { id: 'dashboard', label: 'Dashboard', icon: dashboardIcon, active: true },
-      { id: 'subjects', label: 'My Subjects', icon: mySubjectsIcon },
-      { id: 'assignment', label: 'Assignment', icon: assignmentIcon, dot: true },
-      { id: 'grades', label: 'Grades', icon: gradesIcon },
+      { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', active: true },
+      { id: 'subjects', label: 'My Subjects', icon: 'menu_book' },
+      { id: 'assignment', label: 'Assignment', icon: 'assignment', dot: true },
+      { id: 'grades', label: 'Grades', icon: 'grading' },
     ],
   },
   {
     title: 'Learning Menu',
     items: [
-      { id: 'resources', label: 'Resources', icon: resourcesIcon },
-      { id: 'chat-room', label: 'Chat Room', icon: chatRoomIcon },
-      { id: 'ai-tutor', label: 'AI Tutor', icon: aiTutorIcon, badge: 'NEW' },
+      { id: 'resources', label: 'Resources', icon: 'folder' },
+      { id: 'chat-room', label: 'Chat Room', icon: 'forum' },
+      { id: 'ai-tutor', label: 'AI Tutor', icon: 'smart_toy', badge: 'NEW' },
     ],
   },
   {
     title: 'Others',
     items: [
-      { id: 'fee-payment', label: 'Fee Payment', icon: feePaymentIcon },
-      { id: 'support', label: 'Support', icon: supportIcon },
+      { id: 'fee-payment', label: 'Fee Payment', icon: 'payments' },
+      { id: 'support', label: 'Support', icon: 'support_agent' },
     ],
   },
 ];
 
 const defaultFooterItems = [
-  { id: 'settings', label: 'Settings', icon: settingsIcon },
-  { id: 'logout', label: 'Logout', icon: logoutIcon },
+  { id: 'settings', label: 'Settings', icon: 'settings' },
+  { id: 'logout', label: 'Logout', icon: 'logout' },
 ];
 
 export default function Sidebar({
@@ -52,7 +41,7 @@ export default function Sidebar({
   footerItems = defaultFooterItems,
 }) {
   const [schoolName, setSchoolName] = useState('School Name');
-  const [schoolLogo, setSchoolLogo] = useState(`${process.env.PUBLIC_URL}/images/school-logo-mark.png`);
+  const [schoolLogo, setSchoolLogo] = useState('');
 
   const [openSections, setOpenSections] = useState(() =>
     sections.reduce((acc, section) => ({ ...acc, [section.title]: true }), {})
@@ -87,7 +76,7 @@ export default function Sidebar({
       </div>
 
       <div className="sidebar__school-card">
-        <img className="sidebar__school-thumb" src={schoolLogo} alt="" width={30} height={30} />
+        <img className="sidebar__school-thumb" src={schoolLogo} alt={`${schoolName} logo`} width={30} height={30} />
         <div className="sidebar__school-text">
           <p className="sidebar__school-name">{schoolName}</p>
           <p className="sidebar__school-class">{accountRole}</p>
@@ -119,7 +108,9 @@ export default function Sidebar({
                         type="button"
                         className={`sidebar__item${item.active ? ' sidebar__item--active' : ''}`}
                       >
-                        <img src={item.icon} alt="" className="sidebar__item-icon" aria-hidden />
+                        <span className="sidebar__item-icon material-symbols-outlined" aria-hidden>
+                          {item.icon}
+                        </span>
                         <span>{item.label}</span>
                         {item.dot && <span className="sidebar__dot" aria-hidden />}
                         {item.badge && <span className="sidebar__badge">{item.badge}</span>}
@@ -138,7 +129,9 @@ export default function Sidebar({
           {footerItems.map((item) => (
             <li key={item.id}>
               <button type="button" className="sidebar__item">
-                <img src={item.icon} alt="" className="sidebar__item-icon" aria-hidden />
+                <span className="sidebar__item-icon material-symbols-outlined" aria-hidden>
+                  {item.icon}
+                </span>
                 <span>{item.label}</span>
               </button>
             </li>
