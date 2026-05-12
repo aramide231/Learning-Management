@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -9,6 +9,11 @@ const RESOURCE_PHYSICS_IMAGE = `${process.env.PUBLIC_URL}/images/resource-physic
 const PHYSICS_RESOURCE_SLIDES = Array.from({ length: 6 }, (_, i) => ({
   id: `physics-slide-${i}`,
 }));
+
+/** Horizontal gap between resource cards (px); must match `.dashboard__resource-track` gap. */
+const RESOURCE_CAROUSEL_GAP_PX = 10;
+/** Main slide width as a fraction of the viewport — smaller value = more peek of neighbors. */
+const RESOURCE_SLIDE_WIDTH_RATIO = 0.86;
 
 const physicsCardContent = {
   title: 'Physics: Quantum Mechanics',
@@ -84,14 +89,40 @@ const notifications = [
 
 export default function Dashboard() {
   const [resourceSlideIndex, setResourceSlideIndex] = useState(0);
+  const [resourceViewportWidth, setResourceViewportWidth] = useState(0);
   const [discussionTab, setDiscussionTab] = useState('personal');
   const [quizShowFullScoreboard, setQuizShowFullScoreboard] = useState(false);
   const [quizMenuOpen, setQuizMenuOpen] = useState(false);
   const quizMenuRef = useRef(null);
+  const resourceViewportRef = useRef(null);
 
   const quizRowsPreview = quizRowsFull.slice(0, 4);
   const quizRowsVisible = quizShowFullScoreboard ? quizRowsFull : quizRowsPreview;
   const quizHasMoreRows = quizRowsFull.length > quizRowsPreview.length;
+
+  const resourceSlideWidth =
+    resourceViewportWidth > 0 ? resourceViewportWidth * RESOURCE_SLIDE_WIDTH_RATIO : 0;
+  const resourceTrackTranslatePx =
+    resourceViewportWidth > 0 && resourceSlideWidth > 0
+      ? (resourceViewportWidth - resourceSlideWidth) / 2 -
+        resourceSlideIndex * (resourceSlideWidth + RESOURCE_CAROUSEL_GAP_PX)
+      : 0;
+
+  useEffect(() => {
+    const el = resourceViewportRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect?.width;
+      if (typeof w === 'number') setResourceViewportWidth(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const el = resourceViewportRef.current;
+    if (el) setResourceViewportWidth(el.getBoundingClientRect().width);
+  }, []);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -354,13 +385,27 @@ export default function Dashboard() {
                   </button>
                 </header>
 
-                <div className="dashboard__resource-viewport">
+                <div
+                  className="dashboard__resource-viewport"
+                  ref={resourceViewportRef}
+                  style={{ '--resource-carousel-gap': `${RESOURCE_CAROUSEL_GAP_PX}px` }}
+                >
                   <div
                     className="dashboard__resource-track"
-                    style={{ transform: `translateX(-${resourceSlideIndex * 100}%)` }}
+                    style={{
+                      transform: `translateX(${resourceTrackTranslatePx}px)`,
+                    }}
                   >
                     {PHYSICS_RESOURCE_SLIDES.map((slide) => (
-                      <div key={slide.id} className="dashboard__resource-slide-panel">
+                      <div
+                        key={slide.id}
+                        className="dashboard__resource-slide-panel"
+                        style={
+                          resourceSlideWidth > 0
+                            ? { width: resourceSlideWidth, flex: '0 0 auto' }
+                            : { flex: '0 0 100%', minWidth: '100%' }
+                        }
+                      >
                         <div className="dashboard__resource-media">
                           <img
                             className="dashboard__resource-image"
@@ -369,15 +414,17 @@ export default function Dashboard() {
                           />
                           <span className="dashboard__resource-new-badge">NEW</span>
                         </div>
-                        <p className="dashboard__resource-name">{physicsCardContent.title}</p>
-                        <p className="dashboard__resource-author">{physicsCardContent.author}</p>
-                        <div className="dashboard__resource-progress-row">
-                          <span className="dashboard__resource-pct">{physicsCardContent.progress}%</span>
-                          <div className="dashboard__resource-bar-track" aria-hidden>
-                            <div
-                              className="dashboard__resource-bar-fill"
-                              style={{ width: `${physicsCardContent.progress}%` }}
-                            />
+                        <div className="dashboard__resource-slide-body">
+                          <p className="dashboard__resource-name">{physicsCardContent.title}</p>
+                          <p className="dashboard__resource-author">{physicsCardContent.author}</p>
+                          <div className="dashboard__resource-progress-row">
+                            <span className="dashboard__resource-pct">{physicsCardContent.progress}%</span>
+                            <div className="dashboard__resource-bar-track" aria-hidden>
+                              <div
+                                className="dashboard__resource-bar-fill"
+                                style={{ width: `${physicsCardContent.progress}%` }}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>

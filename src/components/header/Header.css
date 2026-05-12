@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   padding: 0.85rem 1.5rem;
   background: #ffffff;
-  border-bottom: 1px solid #8e8e93;
+  border-bottom: 1px solid #eceef1;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
@@ -19,7 +19,7 @@
   max-width: 28rem;
   padding: 0.55rem 1rem;
   background: #ffffff;
-  border: 1px solid #8e8e93;
+  border: 1px solid #e5e7eb;
   border-radius: 999px;
 }
 
@@ -76,7 +76,7 @@
   height: 0.45rem;
   border-radius: 999px;
   background: #ef4444;
-  border: 1.5px solid #8e8e93;
+  border: 1.5px solid #f3f4f6;
 }
 
 .dashboard-header__profile {
