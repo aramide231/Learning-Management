@@ -168,7 +168,10 @@ export default function Login() {
               </a>
             </div>
             <div className="login__hero-slide">
-              <p className="login__hero-tagline">Streamlining Education, Empowering Every Role.</p>
+              <p className="login__hero-tagline">
+                <span className="login__hero-tagline-line">Streamlining Education,</span>
+                <span className="login__hero-tagline-line">Empowering Every Role.</span>
+              </p>
               <div className="login__hero-dots" aria-hidden>
                 {heroSlides.map((slide, index) => (
                   <span

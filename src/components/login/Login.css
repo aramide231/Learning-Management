@@ -288,7 +288,10 @@
   font-size: clamp(1.5rem, 2.2vw, 2.1rem);
   font-weight: 600;
   line-height: 1.2;
-  max-width: 18rem;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  ;
 }
 
 .login__hero-dots {

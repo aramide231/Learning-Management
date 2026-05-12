@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -57,12 +57,24 @@ const discussionItems = [
   },
 ];
 
-const quizRows = [
-  { id: 'victoria', name: 'Wiliams Victoria A.', className: 'JS 3', rank: '1 st', score: '9 points' },
-  { id: 'obong', name: 'Obong Victor E.', className: 'SS 1', rank: '2 nd', score: '8 points' },
-  { id: 'jerome', name: 'Jerome Amore O.', className: 'JS 2', rank: '3 rd', score: '7 points' },
-  { id: 'adebisi1', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '4 th', score: '6 points' },
-  { id: 'adebisi2', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '4 th', score: '6 points' },
+const quizRowsFull = [
+  { id: 'quiz-1', name: 'Williams Victoria A.', className: 'JS 3', rank: '1 st', score: '9 points' },
+  { id: 'quiz-2', name: 'Obong Victor E.', className: 'SS 1', rank: '2 nd', score: '8 points' },
+  { id: 'quiz-3', name: 'Jerome Amore O.', className: 'JS 2', rank: '3 rd', score: '7 points' },
+  { id: 'quiz-4', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '4 th', score: '6 points' },
+  { id: 'quiz-5', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '5 th', score: '5 points' },
+  { id: 'quiz-6', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '6 th', score: '5 points' },
+  { id: 'quiz-7', name: 'Jerome Amore O.', className: 'JS 2', rank: '7 th', score: '4 points' },
+  { id: 'quiz-8', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '8 th', score: '3 points' },
+  { id: 'quiz-9', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '9 th', score: '3 points' },
+  { id: 'quiz-10', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '10 th', score: '2 points' },
+  { id: 'quiz-11', name: 'Adebisi Mustapha F.', className: 'SS 3', rank: '11 th', score: '2 points' },
+];
+
+const discussionTabs = [
+  { id: 'personal', label: 'Personal' },
+  { id: 'groups', label: 'Groups' },
+  { id: 'teachers', label: 'Teachers' },
 ];
 
 const notifications = [
@@ -72,6 +84,14 @@ const notifications = [
 
 export default function Dashboard() {
   const [resourceSlideIndex, setResourceSlideIndex] = useState(0);
+  const [discussionTab, setDiscussionTab] = useState('personal');
+  const [quizShowFullScoreboard, setQuizShowFullScoreboard] = useState(false);
+  const [quizMenuOpen, setQuizMenuOpen] = useState(false);
+  const quizMenuRef = useRef(null);
+
+  const quizRowsPreview = quizRowsFull.slice(0, 4);
+  const quizRowsVisible = quizShowFullScoreboard ? quizRowsFull : quizRowsPreview;
+  const quizHasMoreRows = quizRowsFull.length > quizRowsPreview.length;
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -79,6 +99,24 @@ export default function Dashboard() {
     }, 3500);
     return () => window.clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!quizMenuOpen) return undefined;
+    const onPointerDown = (event) => {
+      if (quizMenuRef.current && !quizMenuRef.current.contains(event.target)) {
+        setQuizMenuOpen(false);
+      }
+    };
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setQuizMenuOpen(false);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [quizMenuOpen]);
 
   return (
     <div className="dashboard">
@@ -208,15 +246,21 @@ export default function Dashboard() {
                   </header>
 
                   <nav className="dashboard__discussion-tabs" aria-label="Discussion categories">
-                    <button type="button" className="dashboard__discussion-tab dashboard__discussion-tab--active">
-                      Personal
-                    </button>
-                    <button type="button" className="dashboard__discussion-tab">
-                      Groups
-                    </button>
-                    <button type="button" className="dashboard__discussion-tab">
-                      Teachers
-                    </button>
+                    {discussionTabs.map((tab) => {
+                      const isActive = discussionTab === tab.id;
+                      return (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          role="tab"
+                          className={`dashboard__discussion-tab${isActive ? ' dashboard__discussion-tab--active' : ''}`}
+                          aria-selected={isActive}
+                          onClick={() => setDiscussionTab(tab.id)}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
                   </nav>
 
                   <ul className="dashboard__discussion-list">
@@ -239,11 +283,39 @@ export default function Dashboard() {
                 <article className="dashboard__quiz-card" aria-label="Quiz scoreboard">
                   <header className="dashboard__quiz-head">
                     <h2 className="dashboard__quiz-title">Quiz Scoreboard</h2>
-                    <button type="button" className="dashboard__quiz-more" aria-label="More options">
-                      <span className="material-symbols-outlined" aria-hidden>
-                        more_horiz
-                      </span>
-                    </button>
+                    <div className="dashboard__quiz-head-actions" ref={quizMenuRef}>
+                      <button
+                        type="button"
+                        className="dashboard__quiz-more"
+                        aria-label="More options"
+                        aria-expanded={quizMenuOpen}
+                        aria-haspopup="menu"
+                        disabled={!quizHasMoreRows}
+                        onClick={() => quizHasMoreRows && setQuizMenuOpen((open) => !open)}
+                      >
+                        <span className="material-symbols-outlined" aria-hidden>
+                          more_horiz
+                        </span>
+                      </button>
+                      {quizMenuOpen && quizHasMoreRows && (
+                        <div className="dashboard__quiz-menu" role="menu">
+                          <button
+                            type="button"
+                            role="menuitem"
+                            className="dashboard__quiz-menu-item"
+                            onClick={() => {
+                              setQuizShowFullScoreboard((open) => !open);
+                              setQuizMenuOpen(false);
+                            }}
+                          >
+                            <span className="material-symbols-outlined" aria-hidden>
+                              {quizShowFullScoreboard ? 'fullscreen_exit' : 'open_in_full'}
+                            </span>
+                            {quizShowFullScoreboard ? 'Show less' : 'View all'}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </header>
 
                   <div className="dashboard__quiz-table-head" aria-hidden>
@@ -254,7 +326,7 @@ export default function Dashboard() {
                   </div>
 
                   <ul className="dashboard__quiz-list">
-                    {quizRows.map((row) => (
+                    {quizRowsVisible.map((row) => (
                       <li key={row.id} className="dashboard__quiz-row">
                         <div className="dashboard__quiz-name-wrap">
                           <span className="dashboard__quiz-avatar" aria-hidden />

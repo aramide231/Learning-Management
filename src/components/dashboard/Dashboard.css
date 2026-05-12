@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 20px 18px 16px;
+  padding: 16px 14px;
   border-bottom: 1px solid #eceef1;
 }
 
@@ -55,14 +55,14 @@
 .dashboard__title {
   margin: 0;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.05;
   font-weight: 700;
   color: #111827;
 }
 
 .dashboard__subjects {
-  padding: 12px 18px 0;
+  padding: 0 18px 0;
 }
 
 .dashboard__subjects-head {
@@ -70,6 +70,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 16px 14px;
   margin-bottom: 10px;
 }
 
@@ -111,7 +112,7 @@
 .dashboard__subject-card {
   background: linear-gradient(180deg, #19191b 0%, #414141 100%);
   border-radius: 10px;
-  padding: 14px 12px 12px;
+  padding: 16px 14px;
   min-height: 72px;
 }
 
@@ -141,7 +142,7 @@
   border: 1px solid #dfe3e8;
   border-radius: 12px;
   background: #ffffff;
-  padding: 12px 12px 14px;
+  padding: 0 8px 10px;
 }
 
 .dashboard__task-head {
@@ -149,7 +150,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 8px;
+  padding: 10px 8px;
+  margin-bottom: 6px;
 }
 
 .dashboard__task-title {
@@ -157,7 +159,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.05;
   font-weight: 700;
   color: #111827;
@@ -194,7 +196,7 @@
 }
 
 .dashboard__task-note {
-  margin: 0 0 14px;
+  margin: 0 0 8px;
   font-size: 12px;
   font-style: italic;
   color: #9ca3af;
@@ -205,7 +207,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 10px;
+  row-gap: 12px;
 }
 
 .dashboard__task-item {
@@ -214,7 +216,7 @@
   gap: 6px;
   border-radius: 10px;
   background: #f8fafc;
-  padding: 8px 10px;
+  padding: 6px 8px;
 }
 
 .dashboard__task-avatar {
@@ -282,7 +284,7 @@
   border: 1px solid #dfe3e8;
   border-radius: 12px;
   background: #ffffff;
-  padding: 12px 10px 8px 8px;
+  padding: 0 10px 8px 8px;
 }
 
 .dashboard__analytics-head {
@@ -290,12 +292,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 0 6px 8px;
+  padding: 16px 14px;
+  margin-bottom: 8px;
 }
 
 .dashboard__analytics-title {
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.05;
   font-weight: 700;
   color: #111827;
@@ -344,7 +347,7 @@
   border: 1px solid #dfe3e8;
   border-radius: 12px;
   background: #ffffff;
-  padding: 10px 12px 8px;
+  padding: 0 12px 8px;
 }
 
 .dashboard__discussion-head {
@@ -352,12 +355,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 16px 14px;
   margin-bottom: 8px;
 }
 
 .dashboard__discussion-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.02;
   font-weight: 700;
   color: #111827;
@@ -385,7 +389,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
@@ -483,7 +487,7 @@
   border: 1px solid #dfe3e8;
   border-radius: 12px;
   background: #ffffff;
-  padding: 10px 12px 8px;
+  padding: 0 12px 8px;
   min-height: 260px;
 }
 
@@ -492,15 +496,25 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 16px 14px;
   margin-bottom: 8px;
 }
 
 .dashboard__quiz-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.02;
   font-weight: 700;
   color: #111827;
+  min-width: 0;
+}
+
+.dashboard__quiz-head-actions {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .dashboard__quiz-more {
@@ -516,8 +530,55 @@
   cursor: pointer;
 }
 
+.dashboard__quiz-more:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.dashboard__quiz-more:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
 .dashboard__quiz-more .material-symbols-outlined {
   font-size: 18px;
+}
+
+.dashboard__quiz-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 8.5rem;
+  padding: 6px;
+  border-radius: 10px;
+  background: #0f172a;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.22);
+}
+
+.dashboard__quiz-menu-item {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dashboard__quiz-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dashboard__quiz-menu-item .material-symbols-outlined {
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .dashboard__quiz-table-head {
@@ -547,7 +608,7 @@
   gap: 6px;
   align-items: center;
   width: 100%;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 2px solid #8e8e93;
 }
 
@@ -618,7 +679,7 @@
   border: 1px solid #e5e5ea;
   border-radius: 10px;
   background: #f2f2f7;
-  padding: 10px 10px 8px;
+  padding: 0 10px 8px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   min-width: 0;
 }
@@ -628,6 +689,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  padding: 16px 14px;
   margin-bottom: 10px;
   min-width: 0;
 }
@@ -668,7 +730,7 @@
   border: 1px solid #dfe3e8;
   border-radius: 10px;
   background: #ffffff;
-  padding: 10px 10px;
+  padding: 0 10px 10px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
   min-width: 0;
 }
@@ -677,7 +739,7 @@
   border: 1px solid #e5e5ea;
   border-radius: 10px;
   background: #f2f2f7;
-  padding: 10px 10px;
+  padding: 0 10px 10px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   min-width: 0;
 }
@@ -687,13 +749,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 16px 14px;
   margin-bottom: 8px;
 }
 
 .dashboard__performance-title,
 .dashboard__notification-title {
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.03;
   font-weight: 700;
   color: #111827;
@@ -953,6 +1016,7 @@
 /* Aside: Performance + Notification sized for ~230px column */
 .dashboard__aside .dashboard__performance-head,
 .dashboard__aside .dashboard__notification-head {
+  padding: 16px 14px;
   margin-bottom: 8px;
   gap: 6px;
   min-width: 0;
