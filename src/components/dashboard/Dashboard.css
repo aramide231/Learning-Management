@@ -35,7 +35,7 @@
   align-items: center;
   gap: 10px;
   padding: 16px 14px;
-  border-bottom: 1px solid #eceef1;
+  border-bottom: 1px solid #8e8e93;
 }
 
 .dashboard__title-icon {
@@ -44,7 +44,7 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #8e8e93;
   border-radius: 6px;
   background: #f8fafc;
   color: #6b7280;
@@ -139,10 +139,11 @@
 }
 
 .dashboard__task-card {
-  border: 1px solid #dfe3e8;
+  border: 1px solid #8e8e93;
   border-radius: 12px;
   background: #ffffff;
   padding: 0 8px 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .dashboard__task-head {
@@ -224,7 +225,7 @@
   height: 26px;
   border-radius: 999px;
   background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #8e8e93;
   flex-shrink: 0;
 }
 
@@ -281,10 +282,11 @@
 }
 
 .dashboard__analytics-card {
-  border: 1px solid #dfe3e8;
+  border: 1px solid #8e8e93;
   border-radius: 12px;
   background: #ffffff;
   padding: 0 10px 8px 8px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .dashboard__analytics-head {
@@ -344,7 +346,7 @@
   min-height: 260px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #dfe3e8;
+  border: 1px solid #8e8e93;
   border-radius: 12px;
   background: #ffffff;
   padding: 0 12px 8px;
@@ -407,7 +409,7 @@
 
 .dashboard__discussion-tab--active {
   color: #111827;
-  border-bottom: 2px solid #111827;
+  border-bottom: 2px solid #8e8e93;
   padding-bottom: 4px;
 }
 
@@ -425,7 +427,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 0;
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid #8e8e93;
 }
 
 .dashboard__discussion-item:last-child {
@@ -484,7 +486,7 @@
 }
 
 .dashboard__quiz-card {
-  border: 1px solid #dfe3e8;
+  border: 1px solid #8e8e93;
   border-radius: 12px;
   background: #ffffff;
   padding: 0 12px 8px;
@@ -676,7 +678,7 @@
 }
 
 .dashboard__resource-card {
-  border: 1px solid #e5e5ea;
+  border: 1px solid #8e8e93;
   border-radius: 10px;
   background: #f2f2f7;
   padding: 0 10px 8px;
@@ -727,7 +729,7 @@
 }
 
 .dashboard__performance-card {
-  border: 1px solid #dfe3e8;
+  border: 1px solid #8e8e93;
   border-radius: 10px;
   background: #ffffff;
   padding: 0 10px 10px;
@@ -736,7 +738,7 @@
 }
 
 .dashboard__notification-card {
-  border: 1px solid #e5e5ea;
+  border: 1px solid #8e8e93;
   border-radius: 10px;
   background: #f2f2f7;
   padding: 0 10px 10px;
@@ -895,7 +897,7 @@
 }
 
 .dashboard__resource-dot:focus-visible {
-  outline: 2px solid #111827;
+  outline: 2px solid #8e8e93;
   outline-offset: 2px;
 }
 
