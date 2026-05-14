@@ -92,6 +92,23 @@ const notifications = [
   { id: 'sports', title: 'Interhouse Sports', text: 'Prepare yourselves for an epic experi...' },
 ];
 
+const TASK_FILTER_OPTIONS = [
+  { id: 'assignment', label: 'Assignment' },
+  { id: 'quiz', label: 'Quiz' },
+  { id: 'project', label: 'Project' },
+];
+
+const RESOURCE_FORMAT_OPTIONS = [
+  { id: 'pdf', label: 'PDF' },
+  { id: 'videos', label: 'Videos' },
+];
+
+const PERFORMANCE_TERM_OPTIONS = [
+  { id: 'first', label: 'First Term' },
+  { id: 'second', label: 'Second Term' },
+  { id: 'third', label: 'Third Term' },
+];
+
 const ANALYTICS_GRADES_FILL = '#111827';
 const ANALYTICS_ATTENDANCE_FILL = '#d1d5db';
 
@@ -113,8 +130,24 @@ export default function Dashboard() {
   const [quizMenuOpen, setQuizMenuOpen] = useState(false);
   const quizMenuRef = useRef(null);
 
+  const [taskFilterOpen, setTaskFilterOpen] = useState(false);
+  const [taskFilterId, setTaskFilterId] = useState('assignment');
+  const taskFilterRef = useRef(null);
+
+  const [resourceFilterOpen, setResourceFilterOpen] = useState(false);
+  const [resourceFormatId, setResourceFormatId] = useState('pdf');
+  const resourceFilterRef = useRef(null);
+
+  const [performanceFilterOpen, setPerformanceFilterOpen] = useState(false);
+  const [performanceTermId, setPerformanceTermId] = useState('first');
+  const performanceFilterRef = useRef(null);
+
   const quizRowsPreview = quizRowsFull.slice(0, 4);
   const quizHasMoreRows = quizRowsFull.length > quizRowsPreview.length;
+
+  const taskFilterLabel = TASK_FILTER_OPTIONS.find((o) => o.id === taskFilterId)?.label ?? 'Assignment';
+  const resourceFormatLabel = RESOURCE_FORMAT_OPTIONS.find((o) => o.id === resourceFormatId)?.label ?? 'PDF';
+  const performanceTermLabel = PERFORMANCE_TERM_OPTIONS.find((o) => o.id === performanceTermId)?.label ?? 'First Term';
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -140,6 +173,34 @@ export default function Dashboard() {
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [quizMenuOpen]);
+
+  useEffect(() => {
+    if (!taskFilterOpen && !resourceFilterOpen && !performanceFilterOpen) return undefined;
+    const onPointerDown = (event) => {
+      if (taskFilterOpen && taskFilterRef.current && !taskFilterRef.current.contains(event.target)) {
+        setTaskFilterOpen(false);
+      }
+      if (resourceFilterOpen && resourceFilterRef.current && !resourceFilterRef.current.contains(event.target)) {
+        setResourceFilterOpen(false);
+      }
+      if (performanceFilterOpen && performanceFilterRef.current && !performanceFilterRef.current.contains(event.target)) {
+        setPerformanceFilterOpen(false);
+      }
+    };
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setTaskFilterOpen(false);
+        setResourceFilterOpen(false);
+        setPerformanceFilterOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [taskFilterOpen, resourceFilterOpen, performanceFilterOpen]);
 
   useEffect(() => {
     if (!quizScoreboardModalOpen) return undefined;
@@ -196,12 +257,43 @@ export default function Dashboard() {
                 <article className="dashboard__task-card" aria-label="Task card">
                   <header className="dashboard__task-head">
                     <h2 className="dashboard__task-title">Task</h2>
-                    <button type="button" className="dashboard__task-filter">
-                      Assignment
-                      <span className="material-symbols-outlined" aria-hidden>
-                        filter_list
-                      </span>
-                    </button>
+                    <div className="dashboard__filter-pack" ref={taskFilterRef}>
+                      <button
+                        type="button"
+                        className="dashboard__filter-trigger"
+                        aria-expanded={taskFilterOpen}
+                        aria-haspopup="menu"
+                        onClick={() => {
+                          setResourceFilterOpen(false);
+                          setPerformanceFilterOpen(false);
+                          setTaskFilterOpen((open) => !open);
+                        }}
+                      >
+                        {taskFilterLabel}
+                        <span className="material-symbols-outlined" aria-hidden>
+                          filter_list
+                        </span>
+                      </button>
+                      {taskFilterOpen && (
+                        <ul className="dashboard__filter-menu" role="menu">
+                          {TASK_FILTER_OPTIONS.map((opt) => (
+                            <li key={opt.id} role="none">
+                              <button
+                                type="button"
+                                role="menuitem"
+                                className={`dashboard__filter-option${opt.id === taskFilterId ? ' dashboard__filter-option--active' : ''}`}
+                                onClick={() => {
+                                  setTaskFilterId(opt.id);
+                                  setTaskFilterOpen(false);
+                                }}
+                              >
+                                {opt.label}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </header>
 
                   <p className="dashboard__task-note">complete these assignments by friday, 9PM</p>
@@ -400,12 +492,43 @@ export default function Dashboard() {
               <article className="dashboard__resource-card" aria-label="Resources">
                 <header className="dashboard__resource-head">
                   <h3 className="dashboard__resource-title">Resources</h3>
-                  <button type="button" className="dashboard__resource-pill">
-                    PDF
-                    <span className="material-symbols-outlined" aria-hidden>
-                      filter_list
-                    </span>
-                  </button>
+                  <div className="dashboard__filter-pack" ref={resourceFilterRef}>
+                    <button
+                      type="button"
+                      className="dashboard__filter-trigger dashboard__filter-trigger--compact"
+                      aria-expanded={resourceFilterOpen}
+                      aria-haspopup="menu"
+                      onClick={() => {
+                        setTaskFilterOpen(false);
+                        setPerformanceFilterOpen(false);
+                        setResourceFilterOpen((open) => !open);
+                      }}
+                    >
+                      {resourceFormatLabel}
+                      <span className="material-symbols-outlined" aria-hidden>
+                        filter_list
+                      </span>
+                    </button>
+                    {resourceFilterOpen && (
+                      <ul className="dashboard__filter-menu" role="menu">
+                        {RESOURCE_FORMAT_OPTIONS.map((opt) => (
+                          <li key={opt.id} role="none">
+                            <button
+                              type="button"
+                              role="menuitem"
+                              className={`dashboard__filter-option${opt.id === resourceFormatId ? ' dashboard__filter-option--active' : ''}`}
+                              onClick={() => {
+                                setResourceFormatId(opt.id);
+                                setResourceFilterOpen(false);
+                              }}
+                            >
+                              {opt.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </header>
 
                 <div className="dashboard__resource-viewport">
@@ -457,12 +580,43 @@ export default function Dashboard() {
               <article className="dashboard__performance-card">
                 <header className="dashboard__performance-head">
                   <h3 className="dashboard__performance-title">Performance</h3>
-                  <button type="button" className="dashboard__performance-pill">
-                    First Term
-                    <span className="material-symbols-outlined" aria-hidden>
-                      filter_list
-                    </span>
-                  </button>
+                  <div className="dashboard__filter-pack" ref={performanceFilterRef}>
+                    <button
+                      type="button"
+                      className="dashboard__filter-trigger dashboard__filter-trigger--compact"
+                      aria-expanded={performanceFilterOpen}
+                      aria-haspopup="menu"
+                      onClick={() => {
+                        setTaskFilterOpen(false);
+                        setResourceFilterOpen(false);
+                        setPerformanceFilterOpen((open) => !open);
+                      }}
+                    >
+                      {performanceTermLabel}
+                      <span className="material-symbols-outlined" aria-hidden>
+                        filter_list
+                      </span>
+                    </button>
+                    {performanceFilterOpen && (
+                      <ul className="dashboard__filter-menu" role="menu">
+                        {PERFORMANCE_TERM_OPTIONS.map((opt) => (
+                          <li key={opt.id} role="none">
+                            <button
+                              type="button"
+                              role="menuitem"
+                              className={`dashboard__filter-option${opt.id === performanceTermId ? ' dashboard__filter-option--active' : ''}`}
+                              onClick={() => {
+                                setPerformanceTermId(opt.id);
+                                setPerformanceFilterOpen(false);
+                              }}
+                            >
+                              {opt.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </header>
                 <div className="dashboard__performance-body">
                   <div className="dashboard__performance-chart" aria-hidden>
