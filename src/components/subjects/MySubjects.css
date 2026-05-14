@@ -1,4 +1,276 @@
-/* My Subjects: single-column main until Teachers panel is added */
-.dashboard__body--subjects-shell {
-  grid-template-columns: minmax(0, 1fr);
+/* My Subjects — subject cards match design frame: 160×148px, radius 10, border 0.5 */
+
+.dashboard__body--my-subjects {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 302px);
+  gap: 22px;
+  padding-right: 11px;
+}
+
+.dashboard__body--my-subjects .dashboard__aside {
+  max-width: 302px;
+  padding-top: 16px;
+}
+
+@media (max-width: 960px) {
+  .dashboard__body--my-subjects {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dashboard__body--my-subjects .dashboard__aside {
+    max-width: none;
+  }
+}
+
+.my-subjects {
+  padding: 12px 11px 20px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Fixed card width from layout; auto-fill wraps 160px columns */
+.my-subjects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 12px;
+  margin-bottom: 22px;
+  justify-content: start;
+}
+
+.my-subjects__card {
+  margin: 0;
+  box-sizing: border-box;
+  width: 160px;
+  height: 148px;
+  border: 0.5px solid #dfe3e8;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.my-subjects__media {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.my-subjects__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.my-subjects__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.my-subjects__badge--core {
+  background: #2563eb;
+}
+
+.my-subjects__badge--lab {
+  background: #16a34a;
+}
+
+.my-subjects__badge--elective {
+  background: #22c55e;
+}
+
+.my-subjects__body {
+  flex: 0 0 auto;
+  padding: 4px 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-height: 0;
+}
+
+.my-subjects__name {
+  margin: 0;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111827;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-subjects__class {
+  margin: 0 0 3px;
+  font-size: 9px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-subjects__download {
+  box-sizing: border-box;
+  margin-top: auto;
+  align-self: flex-start;
+  margin-left: 2px; /* body padding-left 6px + 2px ≈ 8px inset from card */
+  width: 91px;
+  height: 17px;
+  min-height: 17px;
+  max-height: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border: 0.5px solid #8e8e93;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.102);
+  font: inherit;
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1;
+  color: #374151;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.my-subjects__download:hover {
+  background: rgba(0, 0, 0, 0.14);
+  border-color: #7a7a80;
+}
+
+.my-subjects__download .material-symbols-outlined {
+  flex-shrink: 0;
+  font-size: 9px;
+  width: 9px;
+  height: 9px;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+  color: #4b5563;
+}
+
+.my-subjects__download-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-subjects__term-note {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+.my-subjects__teachers-card {
+  border: 1px solid #e8ecf0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  min-width: 0;
+  overflow: visible;
+}
+
+.my-subjects__teachers-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.my-subjects__teachers-title {
+  margin: 0;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #111827;
+  min-width: 0;
+}
+
+.my-subjects__teachers-list {
+  margin: 0;
+  padding: 10px 8px 14px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-height: min(64vh, 32rem);
+  overflow-y: auto;
+}
+
+.my-subjects__teacher-row {
+  box-sizing: border-box;
+  width: 252px;
+  max-width: 100%;
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.my-subjects__teacher-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #e2e8f0, #cbd5e1);
+  flex-shrink: 0;
+}
+
+.my-subjects__teacher-text {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+}
+
+.my-subjects__teacher-name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-subjects__teacher-subject {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

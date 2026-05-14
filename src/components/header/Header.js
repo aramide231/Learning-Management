@@ -10,7 +10,7 @@ export default function Header({
   return (
     <header className="dashboard-header">
       <div className="dashboard-header__search-wrap">
-        <Search className="dashboard-header__search-icon" size={18} strokeWidth={2} aria-hidden />
+        <Search className="dashboard-header__search-icon" size={16} strokeWidth={2} aria-hidden />
         <label htmlFor="dashboard-header-search" className="visually-hidden">
           Search
         </label>
@@ -25,16 +25,16 @@ export default function Header({
 
       <div className="dashboard-header__actions">
         <button type="button" className="dashboard-header__notify" aria-label="Notifications">
-          <Bell size={18} strokeWidth={2} aria-hidden />
+          <Bell size={16} strokeWidth={2} aria-hidden />
           <span className="dashboard-header__notify-dot" aria-hidden />
         </button>
 
         <button type="button" className="dashboard-header__profile">
-          <img className="dashboard-header__avatar" src={avatarSrc} alt="" width={40} height={40} />
+          <img className="dashboard-header__avatar" src={avatarSrc} alt="" width={32} height={32} />
           <span className="dashboard-header__profile-text">
             <span className="dashboard-header__name-row">
               <span className="dashboard-header__name">{userName}</span>
-              <ChevronDown size={14} strokeWidth={2} className="dashboard-header__chevron" aria-hidden />
+              <ChevronDown size={12} strokeWidth={2} className="dashboard-header__chevron" aria-hidden />
             </span>
             <span className="dashboard-header__subtitle">{userSubtitle}</span>
           </span>

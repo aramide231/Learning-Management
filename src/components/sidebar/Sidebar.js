@@ -83,7 +83,7 @@ export default function Sidebar({
       </div>
 
       <div className="sidebar__school-card">
-        <img className="sidebar__school-thumb" src={schoolLogo} alt={`${schoolName} logo`} width={30} height={30} />
+        <img className="sidebar__school-thumb" src={schoolLogo} alt={`${schoolName} logo`} width={26} height={26} />
         <div className="sidebar__school-text">
           <p className="sidebar__school-name">{schoolName}</p>
           <p className="sidebar__school-class">{accountRole}</p>
@@ -101,7 +101,7 @@ export default function Sidebar({
             >
               <h2 className="sidebar__section-title">{section.title}</h2>
               <ChevronDown
-                size={13}
+                size={11}
                 className={`sidebar__section-caret${openSections[section.title] ? ' sidebar__section-caret--open' : ''}`}
                 aria-hidden
               />
