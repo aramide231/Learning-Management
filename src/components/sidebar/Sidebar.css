@@ -1,5 +1,6 @@
 .sidebar {
   display: flex;
+  margin-left: 11px;
   flex-direction: column;
   width: 240px;
   min-height: 100vh;
@@ -137,6 +138,13 @@
   font-size: 14px;
   color: #374151;
   cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+a.sidebar__item {
+  appearance: none;
 }
 
 .sidebar__item:hover {

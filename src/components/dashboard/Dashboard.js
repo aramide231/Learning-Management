@@ -1,7 +1,17 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
-import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import './Dashboard.css';
 
 const RESOURCE_PHYSICS_IMAGE = `${process.env.PUBLIC_URL}/images/resource-physics-banner.png`;
@@ -9,11 +19,6 @@ const RESOURCE_PHYSICS_IMAGE = `${process.env.PUBLIC_URL}/images/resource-physic
 const PHYSICS_RESOURCE_SLIDES = Array.from({ length: 6 }, (_, i) => ({
   id: `physics-slide-${i}`,
 }));
-
-/** Horizontal gap between resource cards (px); must match `.dashboard__resource-track` gap. */
-const RESOURCE_CAROUSEL_GAP_PX = 10;
-/** Main slide width as a fraction of the viewport — smaller value = more peek of neighbors. */
-const RESOURCE_SLIDE_WIDTH_RATIO = 0.86;
 
 const physicsCardContent = {
   title: 'Physics: Quantum Mechanics',
@@ -25,7 +30,7 @@ const subjectCards = [
   { id: 'physics', title: 'Physics', subtitle: 'Electricity' },
   { id: 'mathematics', title: 'Mathematics', subtitle: 'Algebraic equation I' },
   { id: 'chemistry', title: 'Chemistry', subtitle: 'Organic Chemistry II' },
-  { id: 'ict', title: 'ICT', subtitle: 'Data security in computing' },
+  { id: 'ict', title: 'ICT', subtitle: 'Introduction to computer' },
 ];
 
 const taskItems = [
@@ -34,7 +39,7 @@ const taskItems = [
 ];
 
 const analyticsData = [
-  { name: 'Mh', grades: 62, attendance: 74 },
+  { name: 'Mth', grades: 62, attendance: 74 },
   { name: 'Chm', grades: 56, attendance: 71 },
   { name: 'Phy', grades: 68, attendance: 79 },
   { name: 'Bio', grades: 60, attendance: 72 },
@@ -87,42 +92,29 @@ const notifications = [
   { id: 'sports', title: 'Interhouse Sports', text: 'Prepare yourselves for an epic experi...' },
 ];
 
+const ANALYTICS_GRADES_FILL = '#111827';
+const ANALYTICS_ATTENDANCE_FILL = '#d1d5db';
+
+function AnalyticsBarTooltip({ active, payload }) {
+  if (!active || !payload?.length) return null;
+  const value = payload[0]?.value;
+  if (value == null) return null;
+  return (
+    <div className="dashboard__analytics-tooltip">
+      <span className="dashboard__analytics-tooltip-value">{value}%</span>
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const [resourceSlideIndex, setResourceSlideIndex] = useState(0);
-  const [resourceViewportWidth, setResourceViewportWidth] = useState(0);
   const [discussionTab, setDiscussionTab] = useState('personal');
-  const [quizShowFullScoreboard, setQuizShowFullScoreboard] = useState(false);
+  const [quizScoreboardModalOpen, setQuizScoreboardModalOpen] = useState(false);
   const [quizMenuOpen, setQuizMenuOpen] = useState(false);
   const quizMenuRef = useRef(null);
-  const resourceViewportRef = useRef(null);
 
   const quizRowsPreview = quizRowsFull.slice(0, 4);
-  const quizRowsVisible = quizShowFullScoreboard ? quizRowsFull : quizRowsPreview;
   const quizHasMoreRows = quizRowsFull.length > quizRowsPreview.length;
-
-  const resourceSlideWidth =
-    resourceViewportWidth > 0 ? resourceViewportWidth * RESOURCE_SLIDE_WIDTH_RATIO : 0;
-  const resourceTrackTranslatePx =
-    resourceViewportWidth > 0 && resourceSlideWidth > 0
-      ? (resourceViewportWidth - resourceSlideWidth) / 2 -
-        resourceSlideIndex * (resourceSlideWidth + RESOURCE_CAROUSEL_GAP_PX)
-      : 0;
-
-  useEffect(() => {
-    const el = resourceViewportRef.current;
-    if (!el || typeof ResizeObserver === 'undefined') return undefined;
-    const ro = new ResizeObserver((entries) => {
-      const w = entries[0]?.contentRect?.width;
-      if (typeof w === 'number') setResourceViewportWidth(w);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  useLayoutEffect(() => {
-    const el = resourceViewportRef.current;
-    if (el) setResourceViewportWidth(el.getBoundingClientRect().width);
-  }, []);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -149,7 +141,22 @@ export default function Dashboard() {
     };
   }, [quizMenuOpen]);
 
+  useEffect(() => {
+    if (!quizScoreboardModalOpen) return undefined;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setQuizScoreboardModalOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [quizScoreboardModalOpen]);
+
   return (
+    <>
     <div className="dashboard">
       <Sidebar />
       <div className="dashboard__main">
@@ -188,10 +195,7 @@ export default function Dashboard() {
               <section className="dashboard__cards-row" aria-label="Task cards row">
                 <article className="dashboard__task-card" aria-label="Task card">
                   <header className="dashboard__task-head">
-                    <h2 className="dashboard__task-title">
-                      Task
-                      <span className="dashboard__task-count">2</span>
-                    </h2>
+                    <h2 className="dashboard__task-title">Task</h2>
                     <button type="button" className="dashboard__task-filter">
                       Assignment
                       <span className="material-symbols-outlined" aria-hidden>
@@ -234,29 +238,48 @@ export default function Dashboard() {
 
                   <div className="dashboard__analytics-chart">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={analyticsData} barGap={4} barCategoryGap="26%" margin={{ top: 8, right: 4, left: -10, bottom: 0 }}>
+                      <BarChart
+                        data={analyticsData}
+                        barGap={2}
+                        barCategoryGap="32%"
+                        margin={{ top: 12, right: 10, left: 0, bottom: 6 }}
+                      >
+                        <CartesianGrid
+                          strokeDasharray="4 4"
+                          stroke="#e5e7eb"
+                          horizontal
+                          vertical={false}
+                        />
                         <XAxis
                           dataKey="name"
                           interval={0}
                           tickLine={false}
                           axisLine={false}
-                          tick={{ fontSize: 9, fill: '#6b7280' }}
+                          tick={{ fontSize: 11, fill: '#9ca3af' }}
+                          dy={6}
                         />
                         <YAxis
+                          width={36}
                           ticks={[0, 20, 40, 60, 80, 100]}
                           domain={[0, 100]}
                           tickLine={false}
                           axisLine={false}
-                          tick={{ fontSize: 10, fill: '#9ca3af' }}
+                          tick={{ fontSize: 11, fill: '#9ca3af' }}
                         />
-                        <Bar dataKey="grades" radius={[8, 8, 0, 0]} barSize={7}>
+                        <Tooltip
+                          shared={false}
+                          cursor={{ fill: 'rgba(248, 250, 252, 0.75)' }}
+                          content={AnalyticsBarTooltip}
+                          wrapperStyle={{ outline: 'none' }}
+                        />
+                        <Bar dataKey="grades" radius={[4, 4, 0, 0]} barSize={5}>
                           {analyticsData.map((entry) => (
-                            <Cell key={`${entry.name}-grades`} fill={entry.name === 'F.Mth' ? '#111827' : '#d1d5db'} />
+                            <Cell key={`${entry.name}-grades`} fill={ANALYTICS_GRADES_FILL} />
                           ))}
                         </Bar>
-                        <Bar dataKey="attendance" radius={[8, 8, 0, 0]} barSize={7}>
+                        <Bar dataKey="attendance" radius={[4, 4, 0, 0]} barSize={5}>
                           {analyticsData.map((entry) => (
-                            <Cell key={`${entry.name}-attendance`} fill="#eceff3" />
+                            <Cell key={`${entry.name}-attendance`} fill={ANALYTICS_ATTENDANCE_FILL} />
                           ))}
                         </Bar>
                       </BarChart>
@@ -335,14 +358,14 @@ export default function Dashboard() {
                             role="menuitem"
                             className="dashboard__quiz-menu-item"
                             onClick={() => {
-                              setQuizShowFullScoreboard((open) => !open);
+                              setQuizScoreboardModalOpen(true);
                               setQuizMenuOpen(false);
                             }}
                           >
                             <span className="material-symbols-outlined" aria-hidden>
-                              {quizShowFullScoreboard ? 'fullscreen_exit' : 'open_in_full'}
+                              open_in_full
                             </span>
-                            {quizShowFullScoreboard ? 'Show less' : 'View all'}
+                            View all
                           </button>
                         </div>
                       )}
@@ -357,7 +380,7 @@ export default function Dashboard() {
                   </div>
 
                   <ul className="dashboard__quiz-list">
-                    {quizRowsVisible.map((row) => (
+                    {quizRowsPreview.map((row) => (
                       <li key={row.id} className="dashboard__quiz-row">
                         <div className="dashboard__quiz-name-wrap">
                           <span className="dashboard__quiz-avatar" aria-hidden />
@@ -385,27 +408,13 @@ export default function Dashboard() {
                   </button>
                 </header>
 
-                <div
-                  className="dashboard__resource-viewport"
-                  ref={resourceViewportRef}
-                  style={{ '--resource-carousel-gap': `${RESOURCE_CAROUSEL_GAP_PX}px` }}
-                >
+                <div className="dashboard__resource-viewport">
                   <div
                     className="dashboard__resource-track"
-                    style={{
-                      transform: `translateX(${resourceTrackTranslatePx}px)`,
-                    }}
+                    style={{ transform: `translateX(-${resourceSlideIndex * 100}%)` }}
                   >
                     {PHYSICS_RESOURCE_SLIDES.map((slide) => (
-                      <div
-                        key={slide.id}
-                        className="dashboard__resource-slide-panel"
-                        style={
-                          resourceSlideWidth > 0
-                            ? { width: resourceSlideWidth, flex: '0 0 auto' }
-                            : { flex: '0 0 100%', minWidth: '100%' }
-                        }
-                      >
+                      <div key={slide.id} className="dashboard__resource-slide-panel">
                         <div className="dashboard__resource-media">
                           <img
                             className="dashboard__resource-image"
@@ -414,17 +423,15 @@ export default function Dashboard() {
                           />
                           <span className="dashboard__resource-new-badge">NEW</span>
                         </div>
-                        <div className="dashboard__resource-slide-body">
-                          <p className="dashboard__resource-name">{physicsCardContent.title}</p>
-                          <p className="dashboard__resource-author">{physicsCardContent.author}</p>
-                          <div className="dashboard__resource-progress-row">
-                            <span className="dashboard__resource-pct">{physicsCardContent.progress}%</span>
-                            <div className="dashboard__resource-bar-track" aria-hidden>
-                              <div
-                                className="dashboard__resource-bar-fill"
-                                style={{ width: `${physicsCardContent.progress}%` }}
-                              />
-                            </div>
+                        <p className="dashboard__resource-name">{physicsCardContent.title}</p>
+                        <p className="dashboard__resource-author">{physicsCardContent.author}</p>
+                        <div className="dashboard__resource-progress-row">
+                          <span className="dashboard__resource-pct">{physicsCardContent.progress}%</span>
+                          <div className="dashboard__resource-bar-track" aria-hidden>
+                            <div
+                              className="dashboard__resource-bar-fill"
+                              style={{ width: `${physicsCardContent.progress}%` }}
+                            />
                           </div>
                         </div>
                       </div>
@@ -483,10 +490,7 @@ export default function Dashboard() {
 
               <article className="dashboard__notification-card">
                 <header className="dashboard__notification-head">
-                  <h3 className="dashboard__notification-title">
-                    Notification
-                    <span className="dashboard__task-count">2</span>
-                  </h3>
+                  <h3 className="dashboard__notification-title">Notification</h3>
                   <button type="button" className="dashboard__notification-check">
                     <span className="material-symbols-outlined" aria-hidden>
                       done_all
@@ -512,5 +516,61 @@ export default function Dashboard() {
         </main>
       </div>
     </div>
+
+    {quizScoreboardModalOpen &&
+      createPortal(
+        <div
+          className="dashboard__quiz-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="dashboard-quiz-scoreboard-modal-title"
+        >
+          <div
+            className="dashboard__quiz-modal-backdrop"
+            aria-hidden
+            onClick={() => setQuizScoreboardModalOpen(false)}
+          />
+          <div className="dashboard__quiz-modal-panel">
+            <header className="dashboard__quiz-modal-header">
+              <h2 id="dashboard-quiz-scoreboard-modal-title" className="dashboard__quiz-modal-title">
+                Quiz Scoreboard
+              </h2>
+              <button
+                type="button"
+                className="dashboard__quiz-modal-close"
+                aria-label="Close"
+                onClick={() => setQuizScoreboardModalOpen(false)}
+              >
+                <span className="material-symbols-outlined" aria-hidden>
+                  close
+                </span>
+              </button>
+            </header>
+
+            <div className="dashboard__quiz-modal-table-head">
+              <span>NAME</span>
+              <span>CLASS</span>
+              <span>RANK</span>
+              <span>SCORE</span>
+            </div>
+
+            <ul className="dashboard__quiz-modal-list">
+              {quizRowsFull.map((row) => (
+                <li key={row.id} className="dashboard__quiz-modal-row">
+                  <div className="dashboard__quiz-modal-name-wrap">
+                    <span className="dashboard__quiz-modal-avatar" aria-hidden />
+                    <span className="dashboard__quiz-modal-name">{row.name}</span>
+                  </div>
+                  <span className="dashboard__quiz-modal-cell">{row.className}</span>
+                  <span className="dashboard__quiz-modal-cell">{row.rank}</span>
+                  <span className="dashboard__quiz-modal-cell">{row.score}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }

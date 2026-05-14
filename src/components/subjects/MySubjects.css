@@ -1,0 +1,4 @@
+/* My Subjects: single-column main until Teachers panel is added */
+.dashboard__body--subjects-shell {
+  grid-template-columns: minmax(0, 1fr);
+}

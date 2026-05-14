@@ -1,12 +1,19 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
+
+/** Main nav items that link in-app; others stay as buttons until routes exist. */
+const MAIN_NAV_PATHS = {
+  dashboard: '/dashboard',
+  subjects: '/subjects',
+};
 
 const defaultSections = [
   {
     title: 'Main Menu',
     items: [
-      { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', active: true },
+      { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
       { id: 'subjects', label: 'My Subjects', icon: 'menu_book' },
       { id: 'assignment', label: 'Assignment', icon: 'assignment', dot: true },
       { id: 'grades', label: 'Grades', icon: 'grading' },
@@ -102,18 +109,37 @@ export default function Sidebar({
             {openSections[section.title] && (
               <ul className="sidebar__list">
                 {section.items.map((item) => {
+                  const to = MAIN_NAV_PATHS[item.id];
+                  const inner = (
+                    <>
+                      <span className="sidebar__item-icon material-symbols-outlined" aria-hidden>
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                      {item.dot && <span className="sidebar__dot" aria-hidden />}
+                      {item.badge && <span className="sidebar__badge">{item.badge}</span>}
+                    </>
+                  );
+
+                  if (to) {
+                    return (
+                      <li key={item.id}>
+                        <NavLink
+                          to={to}
+                          className={({ isActive }) =>
+                            `sidebar__item${isActive ? ' sidebar__item--active' : ''}`
+                          }
+                        >
+                          {inner}
+                        </NavLink>
+                      </li>
+                    );
+                  }
+
                   return (
                     <li key={item.id}>
-                      <button
-                        type="button"
-                        className={`sidebar__item${item.active ? ' sidebar__item--active' : ''}`}
-                      >
-                        <span className="sidebar__item-icon material-symbols-outlined" aria-hidden>
-                          {item.icon}
-                        </span>
-                        <span>{item.label}</span>
-                        {item.dot && <span className="sidebar__dot" aria-hidden />}
-                        {item.badge && <span className="sidebar__badge">{item.badge}</span>}
+                      <button type="button" className="sidebar__item">
+                        {inner}
                       </button>
                     </li>
                   );
