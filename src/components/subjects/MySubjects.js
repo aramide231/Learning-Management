@@ -3,22 +3,20 @@ import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import '../dashboard/Dashboard.css';
 import './MySubjects.css';
+import { SUBJECT_IMAGES } from '../../subjectImages';
 
-const IMG_CHALK = `${process.env.PUBLIC_URL}/images/resource-slide-chalkboard.png`;
-const IMG_LAB = `${process.env.PUBLIC_URL}/images/resource-physics-banner.png`;
-
-/** Ten subjects — order matches teacher list (same teacher name per reference). */
+/** Ten subjects — badges and images from src/general media */
 const MY_SUBJECTS = [
-  { id: 'physics', title: 'Physics', classLabel: 'SS 1A', badge: 'core', image: IMG_CHALK },
-  { id: 'chemistry', title: 'Chemistry', classLabel: 'SS 1A', badge: 'lab', image: IMG_LAB },
-  { id: 'mathematics', title: 'Mathematics', classLabel: 'SS 1A', badge: 'core', image: IMG_CHALK },
-  { id: 'f-mathematics', title: 'F. Mathematics', classLabel: 'SS 1A', badge: 'core', image: IMG_LAB },
-  { id: 'biology', title: 'Biology', classLabel: 'SS 1A', badge: 'lab', image: IMG_CHALK },
-  { id: 'civic', title: 'Civic Education', classLabel: 'SS 1A', badge: 'elective', image: IMG_LAB },
-  { id: 'social', title: 'Social Studies', classLabel: 'SS 1A', badge: 'elective', image: IMG_CHALK },
-  { id: 'ict', title: 'ICT', classLabel: 'SS 1A', badge: 'core', image: IMG_LAB },
-  { id: 'english', title: 'English Language', classLabel: 'SS 1A', badge: 'core', image: IMG_CHALK },
-  { id: 'programming', title: 'Programming Basics', classLabel: 'SS 1A', badge: 'elective', image: IMG_LAB },
+  { id: 'physics', title: 'Physics', classLabel: 'SS 1A', badges: ['core', 'lab'], image: SUBJECT_IMAGES.physics },
+  { id: 'chemistry', title: 'Chemistry', classLabel: 'SS 1A', badges: ['core', 'lab'], image: SUBJECT_IMAGES.chemistry },
+  { id: 'mathematics', title: 'Mathematics', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES.mathematics },
+  { id: 'f-mathematics', title: 'F. Mathematics', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES['f-mathematics'] },
+  { id: 'biology', title: 'Biology', classLabel: 'SS 1A', badges: ['core', 'lab'], image: SUBJECT_IMAGES.biology },
+  { id: 'civic', title: 'Civic Education', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES.civic },
+  { id: 'social', title: 'Social Studies', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES.social },
+  { id: 'ict', title: 'ICT', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES.ict },
+  { id: 'english', title: 'English Language', classLabel: 'SS 1A', badges: ['core'], image: SUBJECT_IMAGES.english },
+  { id: 'programming', title: 'Programming Basics', classLabel: 'SS 1A', badges: ['elective', 'lab'], image: SUBJECT_IMAGES.programming },
 ];
 
 const TEACHER_NAME = 'Mr. Davies Ajegunle';
@@ -80,9 +78,13 @@ export default function MySubjects() {
                     <article key={subject.id} className="my-subjects__card" aria-label={subject.title}>
                       <div className="my-subjects__media">
                         <img className="my-subjects__image" src={subject.image} alt="" />
-                        <span className={`my-subjects__badge my-subjects__badge--${subject.badge}`}>
-                          {badgeLabel(subject.badge)}
-                        </span>
+                        <div className="my-subjects__badges" aria-hidden>
+                          {subject.badges.map((badge) => (
+                            <span key={badge} className={`my-subjects__badge my-subjects__badge--${badge}`}>
+                              {badgeLabel(badge)}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       <div className="my-subjects__body">
                         <h2 className="my-subjects__name">{subject.title}</h2>

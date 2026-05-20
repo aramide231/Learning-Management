@@ -1,4 +1,4 @@
-/* My Subjects — subject cards match design frame: 160×148px, radius 10, border 0.5 */
+/* My Subjects — subject cards: 160×128px, radius 10, border 0.5 */
 
 .dashboard__body--my-subjects {
   grid-template-columns: minmax(0, 1fr) minmax(0, 302px);
@@ -6,9 +6,18 @@
   padding-right: 11px;
 }
 
+.dashboard__body--my-subjects {
+  align-items: stretch;
+}
+
 .dashboard__body--my-subjects .dashboard__aside {
   max-width: 302px;
   padding-top: 16px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: min(85vh, 520px);
 }
 
 @media (max-width: 960px) {
@@ -41,11 +50,15 @@
   margin: 0;
   box-sizing: border-box;
   width: 160px;
-  height: 148px;
-  border: 0.5px solid #dfe3e8;
+  height: 128px;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: #dfe3e8;
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  opacity: 1;
+  transform: rotate(0deg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -54,23 +67,34 @@
 
 .my-subjects__media {
   position: relative;
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 0 0 60px;
+  width: 160px;
+  height: 60px;
   background: #f1f5f9;
   overflow: hidden;
 }
 
 .my-subjects__image {
-  width: 100%;
-  height: 100%;
+  width: 160px;
+  height: 60px;
   object-fit: cover;
   display: block;
+  opacity: 1;
+  transform: rotate(0deg);
 }
 
-.my-subjects__badge {
+.my-subjects__badges {
   position: absolute;
   top: 4px;
   right: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  max-width: calc(100% - 8px);
+}
+
+.my-subjects__badge {
   padding: 2px 5px;
   border-radius: 999px;
   font-size: 7px;
@@ -78,6 +102,7 @@
   letter-spacing: 0.04em;
   line-height: 1.2;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .my-subjects__badge--core {
@@ -85,7 +110,7 @@
 }
 
 .my-subjects__badge--lab {
-  background: #16a34a;
+  background: #15803d;
 }
 
 .my-subjects__badge--elective {
@@ -93,16 +118,18 @@
 }
 
 .my-subjects__body {
-  flex: 0 0 auto;
-  padding: 4px 6px 5px;
+  
+  height: 68px;
+  padding: 4px 8px 5px;
   display: flex;
   flex-direction: column;
   gap: 1px;
   min-height: 0;
+  box-sizing: border-box;
 }
 
 .my-subjects__name {
-  margin: 0;
+  margin:0;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 11px;
   font-weight: 700;
@@ -112,10 +139,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  
 }
 
 .my-subjects__class {
-  margin: 0 0 3px;
+  margin-top: 8px;
   font-size: 9px;
   font-weight: 500;
   color: #9ca3af;
@@ -128,7 +156,7 @@
   box-sizing: border-box;
   margin-top: auto;
   align-self: flex-start;
-  margin-left: 2px; /* body padding-left 6px + 2px ≈ 8px inset from card */
+  margin-left: 0;
   width: 91px;
   height: 17px;
   min-height: 17px;
@@ -181,10 +209,15 @@
 .my-subjects__teachers-card {
   border: 1px solid #e8ecf0;
   border-radius: 12px;
-  background: #ffffff;
+  background: #F2F2F7;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
   min-width: 0;
-  overflow: visible;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .my-subjects__teachers-head {
@@ -194,6 +227,7 @@
   gap: 10px;
   padding: 16px 14px 12px;
   border-bottom: 1px solid #f1f5f9;
+  min-width: 0;
 }
 
 .my-subjects__teachers-title {
@@ -204,27 +238,40 @@
   line-height: 1.1;
   color: #111827;
   min-width: 0;
+  flex: 1;
+}
+
+.my-subjects__teachers-head .dashboard__filter-pack {
+  flex-shrink: 0;
 }
 
 .my-subjects__teachers-list {
   margin: 0;
-  padding: 10px 8px 14px;
+  padding: 10px 12px 14px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
-  max-height: min(64vh, 32rem);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-x: none;
+}
+
+.my-subjects__teachers-list > li {
+  width: 100%;
+  min-width: 0;
 }
 
 .my-subjects__teacher-row {
   box-sizing: border-box;
-  width: 252px;
+  width: 100%;
   max-width: 100%;
   height: 52px;
   min-height: 52px;
-  max-height: 52px;
   display: flex;
   align-items: center;
   gap: 10px;

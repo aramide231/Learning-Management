@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import MySubjects from './components/subjects/MySubjects';
+import Assignment from './components/assignment/Assignment';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/subjects" element={<MySubjects />} />
+        <Route path="/assignments" element={<Assignment />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

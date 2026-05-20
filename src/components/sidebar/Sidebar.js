@@ -7,6 +7,7 @@ import './Sidebar.css';
 const MAIN_NAV_PATHS = {
   dashboard: '/dashboard',
   subjects: '/subjects',
+  assignment: '/assignments',
 };
 
 const defaultSections = [
