@@ -4,6 +4,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import MySubjects from './components/subjects/MySubjects';
 import Assignment from './components/assignment/Assignment';
+import AssignmentQuiz from './components/assignment/AssignmentQuiz';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/subjects" element={<MySubjects />} />
         <Route path="/assignments" element={<Assignment />} />
+        <Route path="/assignments/:assignmentId" element={<AssignmentQuiz />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

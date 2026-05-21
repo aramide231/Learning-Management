@@ -5,5 +5,1165 @@
     "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80"
+  ],
+  "assignments": [
+    {
+      "id": "math-1",
+      "subjectId": "mathematics",
+      "subject": "Mathematics",
+      "title": "Algebraic Equation 1",
+      "instruction": "Solve the questions 1-20 based on Chapter 4 of the note",
+      "created": "12/01/25",
+      "due": "18/01/25",
+      "progress": 25,
+      "section": "ongoing",
+      "questions": [
+        {
+          "text": "Solve for x: 2x + 5 = 15",
+          "options": [
+            "5",
+            "9",
+            "7",
+            "2"
+          ]
+        },
+        {
+          "text": "What is the value of 3² + 4²?",
+          "options": [
+            "25",
+            "12",
+            "49",
+            "7"
+          ]
+        },
+        {
+          "text": "Simplify: 4(x + 2) − 2x",
+          "options": [
+            "2x + 8",
+            "6x + 8",
+            "2x + 2",
+            "4x + 6"
+          ]
+        },
+        {
+          "text": "Find the gradient of y = 5x − 3",
+          "options": [
+            "5",
+            "−3",
+            "3",
+            "−5"
+          ]
+        },
+        {
+          "text": "What is 15% of 200?",
+          "options": [
+            "30",
+            "15",
+            "25",
+            "35"
+          ]
+        },
+        {
+          "text": "Factorise: x² − 9",
+          "options": [
+            "(x−3)(x+3)",
+            "(x−9)(x+9)",
+            "(x−3)²",
+            "x(x−9)"
+          ]
+        },
+        {
+          "text": "Solve: 3x − 7 = 2x + 5",
+          "options": [
+            "12",
+            "7",
+            "−12",
+            "2"
+          ]
+        },
+        {
+          "text": "What is the HCF of 24 and 36?",
+          "options": [
+            "12",
+            "6",
+            "8",
+            "4"
+          ]
+        },
+        {
+          "text": "Evaluate: (−2)³",
+          "options": [
+            "−8",
+            "8",
+            "6",
+            "−6"
+          ]
+        },
+        {
+          "text": "If y = 2x + 1 and x = 4, find y",
+          "options": [
+            "9",
+            "8",
+            "7",
+            "10"
+          ]
+        },
+        {
+          "text": "What is the LCM of 5 and 7?",
+          "options": [
+            "35",
+            "12",
+            "25",
+            "14"
+          ]
+        },
+        {
+          "text": "Solve: x/4 = 3",
+          "options": [
+            "12",
+            "7",
+            "4",
+            "9"
+          ]
+        },
+        {
+          "text": "Expand: (x + 3)(x + 2)",
+          "options": [
+            "x² + 5x + 6",
+            "x² + 6",
+            "2x + 5",
+            "x² + 5x + 5"
+          ]
+        },
+        {
+          "text": "What is √144?",
+          "options": [
+            "12",
+            "14",
+            "11",
+            "13"
+          ]
+        },
+        {
+          "text": "Solve the inequality: 2x > 10",
+          "options": [
+            "x > 5",
+            "x < 5",
+            "x > 10",
+            "x < 2"
+          ]
+        },
+        {
+          "text": "Find the nth term rule if sequence is 3, 7, 11, 15…",
+          "options": [
+            "4n − 1",
+            "3n + 4",
+            "n + 3",
+            "2n + 1"
+          ]
+        },
+        {
+          "text": "What is 0.75 as a fraction in lowest terms?",
+          "options": [
+            "3/4",
+            "7/5",
+            "1/2",
+            "2/3"
+          ]
+        },
+        {
+          "text": "Calculate the area of a rectangle 8 cm by 5 cm",
+          "options": [
+            "40 cm²",
+            "26 cm²",
+            "13 cm²",
+            "80 cm²"
+          ]
+        },
+        {
+          "text": "If sin θ = 0.6, which ratio is cos θ? (θ acute)",
+          "options": [
+            "0.8",
+            "0.6",
+            "1.0",
+            "0.5"
+          ]
+        },
+        {
+          "text": "Solve simultaneously: x + y = 10 and x − y = 2",
+          "options": [
+            "x=6, y=4",
+            "x=5, y=5",
+            "x=8, y=2",
+            "x=4, y=6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chm-1",
+      "subjectId": "chemistry",
+      "subject": "Chemistry",
+      "title": "Organic Chemistry II",
+      "instruction": "Answer questions 1-20 using Chapter 6 laboratory notes",
+      "created": "10/01/25",
+      "due": "20/01/25",
+      "progress": 45,
+      "section": "ongoing",
+      "questions": [
+        {
+          "text": "What is the chemical symbol for sodium?",
+          "options": [
+            "Na",
+            "S",
+            "N",
+            "So"
+          ]
+        },
+        {
+          "text": "How many electrons can the first shell hold?",
+          "options": [
+            "2",
+            "8",
+            "18",
+            "32"
+          ]
+        },
+        {
+          "text": "What is the pH of a neutral solution?",
+          "options": [
+            "7",
+            "0",
+            "14",
+            "1"
+          ]
+        },
+        {
+          "text": "Which gas is produced when metals react with acids?",
+          "options": [
+            "Hydrogen",
+            "Oxygen",
+            "Nitrogen",
+            "Chlorine"
+          ]
+        },
+        {
+          "text": "What is the molecular formula of water?",
+          "options": [
+            "H₂O",
+            "HO₂",
+            "H₂O₂",
+            "OH"
+          ]
+        },
+        {
+          "text": "Define an isotope",
+          "options": [
+            "Same protons, different neutrons",
+            "Same neutrons, different protons",
+            "Same electrons only",
+            "Different element"
+          ]
+        },
+        {
+          "text": "What type of bond shares electron pairs?",
+          "options": [
+            "Covalent",
+            "Ionic",
+            "Metallic",
+            "Hydrogen only"
+          ]
+        },
+        {
+          "text": "Which apparatus measures volume of gas?",
+          "options": [
+            "Gas syringe",
+            "Burette",
+            "Thermometer",
+            "Balance"
+          ]
+        },
+        {
+          "text": "What is the valency of carbon in methane (CH₄)?",
+          "options": [
+            "4",
+            "2",
+            "1",
+            "3"
+          ]
+        },
+        {
+          "text": "Name the process of solid to gas directly",
+          "options": [
+            "Sublimation",
+            "Evaporation",
+            "Condensation",
+            "Fusion"
+          ]
+        },
+        {
+          "text": "Which element has atomic number 6?",
+          "options": [
+            "Carbon",
+            "Oxygen",
+            "Nitrogen",
+            "Boron"
+          ]
+        },
+        {
+          "text": "What is an exothermic reaction?",
+          "options": [
+            "Releases heat",
+            "Absorbs heat",
+            "No energy change",
+            "Only light emitted"
+          ]
+        },
+        {
+          "text": "Identify the acid: HCl",
+          "options": [
+            "Hydrochloric acid",
+            "Sulphuric acid",
+            "Nitric acid",
+            "Ethanoic acid"
+          ]
+        },
+        {
+          "text": "What is the relative formula mass of CO₂? (C=12, O=16)",
+          "options": [
+            "44",
+            "28",
+            "32",
+            "16"
+          ]
+        },
+        {
+          "text": "Which separation technique uses a solvent?",
+          "options": [
+            "Chromatography",
+            "Filtration",
+            "Distillation",
+            "Decanting"
+          ]
+        },
+        {
+          "text": "What is oxidation?",
+          "options": [
+            "Loss of electrons",
+            "Gain of electrons",
+            "Gain of protons",
+            "Loss of mass only"
+          ]
+        },
+        {
+          "text": "Balance: _H₂ + _O₂ → _H₂O",
+          "options": [
+            "2,1,2",
+            "1,1,1",
+            "2,2,2",
+            "1,2,1"
+          ]
+        },
+        {
+          "text": "Which metal is most reactive in the reactivity series given?",
+          "options": [
+            "Potassium",
+            "Copper",
+            "Gold",
+            "Silver"
+          ]
+        },
+        {
+          "text": "What colour is copper(II) sulfate solution?",
+          "options": [
+            "Blue",
+            "Green",
+            "Yellow",
+            "Colourless"
+          ]
+        },
+        {
+          "text": "Define a mole in chemistry",
+          "options": [
+            "6.02×10²³ particles",
+            "1 gram of solute",
+            "1 litre of gas only",
+            "One atom only"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phy-1",
+      "subjectId": "physics",
+      "subject": "Physics",
+      "title": "Electricity & Circuits",
+      "instruction": "Complete questions 1-20 from Chapter 5 on current electricity",
+      "created": "14/01/25",
+      "due": "19/01/25",
+      "progress": 10,
+      "section": "ongoing",
+      "questions": [
+        {
+          "text": "What is the SI unit of force?",
+          "options": [
+            "Newton",
+            "Joule",
+            "Watt",
+            "Pascal"
+          ]
+        },
+        {
+          "text": "Calculate speed if distance = 100 m and time = 20 s",
+          "options": [
+            "5 m/s",
+            "2000 m/s",
+            "0.2 m/s",
+            "120 m/s"
+          ]
+        },
+        {
+          "text": "What is the formula for kinetic energy?",
+          "options": [
+            "½mv²",
+            "mgh",
+            "Fd",
+            "Pt"
+          ]
+        },
+        {
+          "text": "Which quantity is scalar?",
+          "options": [
+            "Mass",
+            "Velocity",
+            "Force",
+            "Displacement"
+          ]
+        },
+        {
+          "text": "What is the acceleration due to gravity (approx.)?",
+          "options": [
+            "10 m/s²",
+            "9 cm/s",
+            "100 m/s",
+            "1 m/s²"
+          ]
+        },
+        {
+          "text": "Ohm’s law states V = ?",
+          "options": [
+            "IR",
+            "I/R",
+            "R/I",
+            "I+R"
+          ]
+        },
+        {
+          "text": "What type of lens converges light?",
+          "options": [
+            "Convex",
+            "Concave",
+            "Plane only",
+            "Bifocal always diverges"
+          ]
+        },
+        {
+          "text": "Frequency is measured in?",
+          "options": [
+            "Hertz",
+            "Metres",
+            "Newtons",
+            "Coulombs"
+          ]
+        },
+        {
+          "text": "What is the law of reflection?",
+          "options": [
+            "Angle i = angle r",
+            "i + r = 90°",
+            "i = 2r",
+            "No relation"
+          ]
+        },
+        {
+          "text": "Power = work ÷ ?",
+          "options": [
+            "Time",
+            "Distance",
+            "Mass",
+            "Force"
+          ]
+        },
+        {
+          "text": "Which wave needs a medium?",
+          "options": [
+            "Sound",
+            "Light",
+            "Radio (in vacuum)",
+            "X-ray in space"
+          ]
+        },
+        {
+          "text": "Weight = mass × ?",
+          "options": [
+            "g",
+            "v",
+            "density",
+            "area"
+          ]
+        },
+        {
+          "text": "What is current measured in?",
+          "options": [
+            "Ampere",
+            "Volt",
+            "Ohm",
+            "Tesla"
+          ]
+        },
+        {
+          "text": "Momentum = mass × ?",
+          "options": [
+            "Velocity",
+            "Acceleration",
+            "Time",
+            "Force"
+          ]
+        },
+        {
+          "text": "Which colour has the longest wavelength in visible light?",
+          "options": [
+            "Red",
+            "Violet",
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "text": "Pressure = force ÷ ?",
+          "options": [
+            "Area",
+            "Volume",
+            "Mass",
+            "Time"
+          ]
+        },
+        {
+          "text": "What is efficiency as a percentage?",
+          "options": [
+            "(useful output/input)×100",
+            "input/output",
+            "output−input",
+            "mass×g"
+          ]
+        },
+        {
+          "text": "A machine has MA = 4. What does that mean?",
+          "options": [
+            "Load/Effort = 4",
+            "Effort/Load = 4",
+            "Work doubles",
+            "No friction"
+          ]
+        },
+        {
+          "text": "Which energy store is in a raised object?",
+          "options": [
+            "Gravitational potential",
+            "Kinetic only",
+            "Thermal only",
+            "Chemical"
+          ]
+        },
+        {
+          "text": "What is the unit of electrical resistance?",
+          "options": [
+            "Ohm",
+            "Farad",
+            "Henry",
+            "Weber"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ict-1",
+      "subjectId": "ict",
+      "subject": "ICT",
+      "title": "Introduction to Spreadsheets",
+      "instruction": "Answer questions 1-20 based on the ICT workbook Unit 3",
+      "created": "08/01/25",
+      "due": "22/01/25",
+      "progress": 60,
+      "section": "ongoing",
+      "questions": [
+        {
+          "text": "What does CPU stand for?",
+          "options": [
+            "Central Processing Unit",
+            "Computer Personal Unit",
+            "Central Program Utility",
+            "Control Processing User"
+          ]
+        },
+        {
+          "text": "Which is an input device?",
+          "options": [
+            "Keyboard",
+            "Monitor",
+            "Printer",
+            "Speaker"
+          ]
+        },
+        {
+          "text": "What does RAM store?",
+          "options": [
+            "Temporary data while running",
+            "Permanent files only",
+            "BIOS only",
+            "Network addresses only"
+          ]
+        },
+        {
+          "text": "Which protocol is used for web pages?",
+          "options": [
+            "HTTP/HTTPS",
+            "FTP only",
+            "SMTP",
+            "DNS only"
+          ]
+        },
+        {
+          "text": "What is a spreadsheet cell address like B3 called?",
+          "options": [
+            "Cell reference",
+            "Formula bar",
+            "Ribbon",
+            "Workbook"
+          ]
+        },
+        {
+          "text": "Which file extension is common for text documents?",
+          "options": [
+            ".txt",
+            ".exe",
+            ".dll",
+            ".iso"
+          ]
+        },
+        {
+          "text": "What does URL stand for?",
+          "options": [
+            "Uniform Resource Locator",
+            "Universal Remote Link",
+            "User Record Log",
+            "Uploaded Resource List"
+          ]
+        },
+        {
+          "text": "Which is system software?",
+          "options": [
+            "Operating system",
+            "Word processor",
+            "Game",
+            "Browser only"
+          ]
+        },
+        {
+          "text": "What is phishing?",
+          "options": [
+            "Fraudulent attempt to steal data",
+            "Hardware failure",
+            "Legal backup",
+            "Fast browsing"
+          ]
+        },
+        {
+          "text": "In binary, what is 1010 in decimal?",
+          "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+          ]
+        },
+        {
+          "text": "What does LAN mean?",
+          "options": [
+            "Local Area Network",
+            "Large Access Node",
+            "Linked Application Name",
+            "Linear Array Number"
+          ]
+        },
+        {
+          "text": "Which formula adds cells A1 to A5 in Excel?",
+          "options": [
+            "=SUM(A1:A5)",
+            "=ADD(A1−A5)",
+            "=TOTAL(A1,A5)",
+            "=A1+A5 only"
+          ]
+        },
+        {
+          "text": "What is cloud computing?",
+          "options": [
+            "Services over the internet",
+            "Weather forecasting",
+            "Local-only storage",
+            "Printer sharing only"
+          ]
+        },
+        {
+          "text": "Which port is commonly used for HTTPS?",
+          "options": [
+            "443",
+            "21",
+            "25",
+            "80 only"
+          ]
+        },
+        {
+          "text": "What is an algorithm?",
+          "options": [
+            "Step-by-step instructions",
+            "A virus",
+            "Hardware chip",
+            "Database table"
+          ]
+        },
+        {
+          "text": "Which storage is typically fastest for access?",
+          "options": [
+            "SSD",
+            "DVD",
+            "Tape",
+            "Floppy"
+          ]
+        },
+        {
+          "text": "What does HTML structure?",
+          "options": [
+            "Web page content",
+            "Spreadsheet",
+            "Video editing",
+            "Email sending only"
+          ]
+        },
+        {
+          "text": "What is copyright?",
+          "options": [
+            "Legal right over creative work",
+            "Copying files freely always",
+            "Hardware warranty",
+            "Open source only"
+          ]
+        },
+        {
+          "text": "Which key shortcut often saves a document?",
+          "options": [
+            "Ctrl+S",
+            "Ctrl+P",
+            "Ctrl+N",
+            "Ctrl+Z"
+          ]
+        },
+        {
+          "text": "What is a firewall used for?",
+          "options": [
+            "Network security",
+            "Cooling the CPU",
+            "Printing faster",
+            "Increasing RAM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "civic-1",
+      "subjectId": "civic",
+      "subject": "Civic Education",
+      "title": "Citizenship & Governance",
+      "instruction": "Attempt questions 1-20 from Module 2 on civic responsibility",
+      "created": "15/01/25",
+      "due": "25/01/25",
+      "progress": 0,
+      "section": "to-attempt",
+      "questions": [
+        {
+          "text": "What is democracy?",
+          "options": [
+            "Government by the people",
+            "Rule by one king",
+            "Military control",
+            "No laws"
+          ]
+        },
+        {
+          "text": "The Nigerian coat of arms symbolises?",
+          "options": [
+            "Unity and strength",
+            "Only agriculture",
+            "Foreign trade only",
+            "Sports"
+          ]
+        },
+        {
+          "text": "What are the three arms of government?",
+          "options": [
+            "Executive, Legislature, Judiciary",
+            "Police, Army, Navy",
+            "School, Hospital, Market",
+            "Tax, Rent, Trade"
+          ]
+        },
+        {
+          "text": "Who can vote in an election (adult citizen)?",
+          "options": [
+            "Registered eligible citizens",
+            "Any visitor",
+            "Children only",
+            "Only judges"
+          ]
+        },
+        {
+          "text": "What is the constitution?",
+          "options": [
+            "Supreme law of the land",
+            "A newspaper",
+            "Party manifesto only",
+            "School timetable"
+          ]
+        },
+        {
+          "text": "Define human rights",
+          "options": [
+            "Basic freedoms entitled to all",
+            "Privileges for leaders only",
+            "Paid services",
+            "Religious rules only"
+          ]
+        },
+        {
+          "text": "What is civic responsibility?",
+          "options": [
+            "Duties to community and state",
+            "Ignoring laws",
+            "Tax evasion",
+            "Avoiding voting always"
+          ]
+        },
+        {
+          "text": "What does NA stand for in Nigerian youth service?",
+          "options": [
+            "National (Youth Service Corps context)",
+            "Northern only",
+            "Naval Academy",
+            "None"
+          ]
+        },
+        {
+          "text": "Rule of law means?",
+          "options": [
+            "Everyone is subject to the law",
+            "Leaders above law",
+            "No courts",
+            "Only customs"
+          ]
+        },
+        {
+          "text": "What is federalism?",
+          "options": [
+            "Power shared between central and states",
+            "One local council only",
+            "No states",
+            "Foreign rule"
+          ]
+        },
+        {
+          "text": "Traffic rules exist mainly to?",
+          "options": [
+            "Protect lives and order",
+            "Collect fines only",
+            "Slow travel only",
+            "Sell cars"
+          ]
+        },
+        {
+          "text": "What is cultism?",
+          "options": [
+            "Secret groups often harmful",
+            "School club",
+            "Religious worship",
+            "Sports team"
+          ]
+        },
+        {
+          "text": "Drug abuse can lead to?",
+          "options": [
+            "Health and social harm",
+            "Better grades always",
+            "Free healthcare",
+            "More rights"
+          ]
+        },
+        {
+          "text": "National anthem should be respected because?",
+          "options": [
+            "It represents national identity",
+            "It is optional always",
+            "It is a song only",
+            "It replaces laws"
+          ]
+        },
+        {
+          "text": "What is corruption?",
+          "options": [
+            "Misuse of entrusted power",
+            "Honest service",
+            "Voting twice legally",
+            "Paying taxes"
+          ]
+        },
+        {
+          "text": "Freedom of speech allows?",
+          "options": [
+            "Expression within the law",
+            "Any threat",
+            "No limits ever",
+            "Only online"
+          ]
+        },
+        {
+          "text": "Community development includes?",
+          "options": [
+            "Roads, schools, health projects",
+            "Only festivals",
+            "Ignoring needs",
+            "Private profit only"
+          ]
+        },
+        {
+          "text": "What is a citizen?",
+          "options": [
+            "Legal member of a state",
+            "Tourist only",
+            "Resident with no rights",
+            "Soldier only"
+          ]
+        },
+        {
+          "text": "Electoral malpractice is?",
+          "options": [
+            "Illegal interference in elections",
+            "Campaigning",
+            "Counting votes",
+            "Registering voters"
+          ]
+        },
+        {
+          "text": "Peaceful coexistence requires?",
+          "options": [
+            "Tolerance and respect",
+            "Violence",
+            "Isolation",
+            "Breaking laws"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eng-1",
+      "subjectId": "english",
+      "subject": "English Language",
+      "title": "Grammar & Composition",
+      "instruction": "Complete questions 1-20 using the English Language handbook",
+      "created": "16/01/25",
+      "due": "26/01/25",
+      "progress": 0,
+      "section": "to-attempt",
+      "questions": [
+        {
+          "text": "Choose the correct spelling",
+          "options": [
+            "Necessary",
+            "Neccessary",
+            "Necesary",
+            "Necassary"
+          ]
+        },
+        {
+          "text": "Identify the noun in: \"The cat slept\"",
+          "options": [
+            "cat",
+            "slept",
+            "The",
+            "in"
+          ]
+        },
+        {
+          "text": "What is the past tense of \"go\"?",
+          "options": [
+            "went",
+            "goed",
+            "gone only",
+            "going"
+          ]
+        },
+        {
+          "text": "Which is a synonym for \"happy\"?",
+          "options": [
+            "Joyful",
+            "Angry",
+            "Tired",
+            "Slow"
+          ]
+        },
+        {
+          "text": "Pick the correct pronoun: \"___ is my book\"",
+          "options": [
+            "This",
+            "Them",
+            "Us",
+            "Were"
+          ]
+        },
+        {
+          "text": "What punctuation ends a question?",
+          "options": [
+            "?",
+            ".",
+            ",",
+            "!"
+          ]
+        },
+        {
+          "text": "Identify the adverb: \"She ran quickly\"",
+          "options": [
+            "quickly",
+            "She",
+            "ran",
+            "She ran"
+          ]
+        },
+        {
+          "text": "Which is a compound word?",
+          "options": [
+            "Football",
+            "Run",
+            "Blue",
+            "Jump"
+          ]
+        },
+        {
+          "text": "Choose the antonym of \"hot\"",
+          "options": [
+            "cold",
+            "warm",
+            "heat",
+            "fire"
+          ]
+        },
+        {
+          "text": "What is a paragraph?",
+          "options": [
+            "Group of related sentences",
+            "One word",
+            "A title only",
+            "A chapter"
+          ]
+        },
+        {
+          "text": "Correct form: \"She ___ to school daily\"",
+          "options": [
+            "goes",
+            "go",
+            "going",
+            "gone"
+          ]
+        },
+        {
+          "text": "Which is figurative language?",
+          "options": [
+            "Metaphor",
+            "Full stop",
+            "Heading",
+            "Index"
+          ]
+        },
+        {
+          "text": "The subject in \"Birds fly\" is?",
+          "options": [
+            "Birds",
+            "fly",
+            "The",
+            "sky"
+          ]
+        },
+        {
+          "text": "Choose the conjunction: \"I ate ___ I was hungry\"",
+          "options": [
+            "because",
+            "quick",
+            "under",
+            "blue"
+          ]
+        },
+        {
+          "text": "What is the plural of \"child\"?",
+          "options": [
+            "children",
+            "childs",
+            "childes",
+            "childrens"
+          ]
+        },
+        {
+          "text": "Which sentence is correct?",
+          "options": [
+            "They are playing",
+            "They is playing",
+            "They am playing",
+            "They be playing"
+          ]
+        },
+        {
+          "text": "A formal letter should include?",
+          "options": [
+            "Address and salutation",
+            "Only slang",
+            "No date",
+            "Emojis only"
+          ]
+        },
+        {
+          "text": "What is the main idea of a passage?",
+          "options": [
+            "Central message",
+            "Longest word",
+            "Last punctuation",
+            "Font size"
+          ]
+        },
+        {
+          "text": "Identify the verb: \"He writes poems\"",
+          "options": [
+            "writes",
+            "He",
+            "poems",
+            "He writes"
+          ]
+        },
+        {
+          "text": "Which word is an adjective in \"tall building\"?",
+          "options": [
+            "tall",
+            "building",
+            "the",
+            "in"
+          ]
+        }
+      ]
+    }
   ]
 }

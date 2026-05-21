@@ -5,6 +5,20 @@
   gap: 12px;
 }
 
+.assignments__loading,
+.assignments__error,
+.assignment-quiz__loading,
+.assignment-quiz__error {
+  padding: 24px 11px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.assignments__error,
+.assignment-quiz__error {
+  color: #b45309;
+}
+
 .assignments__title-start {
   display: flex;
   align-items: center;
@@ -85,6 +99,22 @@
     width: 100%;
     max-width: 100%;
   }
+}
+
+.assignments__card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+}
+
+.assignments__card-link:hover .assignments__card {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+}
+
+.assignments__card-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
 
 /* Card: 316 × 96 */
@@ -187,6 +217,6 @@
 .assignments__card-progress-fill {
   height: 100%;
   border-radius: inherit;
-  background: #6b7280;
-  transition: width 0.2s ease;
+  background: #0f172a;
+  transition: width 0.25s ease;
 }

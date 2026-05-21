@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import '../dashboard/Dashboard.css';
 import './Assignment.css';
-import { SUBJECT_IMAGES } from '../../subjectImages';
+import { useAssignments } from '../../data/assignmentData';
+import { getStoredProgress } from '../../data/assignmentProgress';
 
 const FILTER_OPTIONS = [
   { id: 'all', label: 'All' },
@@ -15,69 +17,6 @@ const FILTER_OPTIONS = [
   { id: 'english', label: 'English Language' },
 ];
 
-const ASSIGNMENTS = [
-  {
-    id: 'math-1',
-    subjectId: 'mathematics',
-    subject: 'Mathematics',
-    created: '12/01/25',
-    due: '18/01/25',
-    progress: 25,
-    section: 'ongoing',
-    image: SUBJECT_IMAGES.mathematics,
-  },
-  {
-    id: 'chm-1',
-    subjectId: 'chemistry',
-    subject: 'Chemistry',
-    created: '10/01/25',
-    due: '20/01/25',
-    progress: 45,
-    section: 'ongoing',
-    image: SUBJECT_IMAGES.chemistry,
-  },
-  {
-    id: 'phy-1',
-    subjectId: 'physics',
-    subject: 'Physics',
-    created: '14/01/25',
-    due: '19/01/25',
-    progress: 10,
-    section: 'ongoing',
-    image: SUBJECT_IMAGES.physics,
-  },
-  {
-    id: 'ict-1',
-    subjectId: 'ict',
-    subject: 'ICT',
-    created: '08/01/25',
-    due: '22/01/25',
-    progress: 60,
-    section: 'ongoing',
-    image: SUBJECT_IMAGES.ict,
-  },
-  {
-    id: 'civic-1',
-    subjectId: 'civic',
-    subject: 'Civic Education',
-    created: '15/01/25',
-    due: '25/01/25',
-    progress: 0,
-    section: 'to-attempt',
-    image: SUBJECT_IMAGES.civic,
-  },
-  {
-    id: 'eng-1',
-    subjectId: 'english',
-    subject: 'English Language',
-    created: '16/01/25',
-    due: '26/01/25',
-    progress: 0,
-    section: 'to-attempt',
-    image: SUBJECT_IMAGES.english,
-  },
-];
-
 const SECTIONS = [
   { id: 'ongoing', label: 'Ongoing' },
   { id: 'to-attempt', label: 'To Attempt' },
@@ -85,29 +24,34 @@ const SECTIONS = [
 ];
 
 function AssignmentCard({ item }) {
+  const progress = getStoredProgress(item.id, item.progress);
+
   return (
-    <article className="assignments__card" aria-label={item.subject}>
-      <div className="assignments__card-media">
-        <img className="assignments__card-image" src={item.image} alt="" />
-      </div>
-      <div className="assignments__card-body">
-        <div className="assignments__card-dates">
-          <span>Created : {item.created}</span>
-          <span>Due Date : {item.due}</span>
+    <Link to={`/assignments/${item.id}`} className="assignments__card-link">
+      <article className="assignments__card" aria-label={item.subject}>
+        <div className="assignments__card-media">
+          <img className="assignments__card-image" src={item.image} alt="" />
         </div>
-        <h3 className="assignments__card-subject">{item.subject}</h3>
-        <div className="assignments__card-progress">
-          <span className="assignments__card-pct">{item.progress}%</span>
-          <div className="assignments__card-progress-track" aria-hidden>
-            <div className="assignments__card-progress-fill" style={{ width: `${item.progress}%` }} />
+        <div className="assignments__card-body">
+          <div className="assignments__card-dates">
+            <span>Created : {item.created}</span>
+            <span>Due Date : {item.due}</span>
+          </div>
+          <h3 className="assignments__card-subject">{item.subject}</h3>
+          <div className="assignments__card-progress">
+            <span className="assignments__card-pct">{progress}%</span>
+            <div className="assignments__card-progress-track" aria-hidden>
+              <div className="assignments__card-progress-fill" style={{ width: `${progress}%` }} />
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }
 
 export default function Assignment() {
+  const { assignments, loading, error } = useAssignments();
   const [filterOpen, setFilterOpen] = useState(false);
   const [filterId, setFilterId] = useState('all');
   const filterRef = useRef(null);
@@ -132,7 +76,7 @@ export default function Assignment() {
 
   const filterLabel = FILTER_OPTIONS.find((o) => o.id === filterId)?.label ?? 'All';
 
-  const filtered = ASSIGNMENTS.filter(
+  const filtered = assignments.filter(
     (item) => filterId === 'all' || item.subjectId === filterId
   );
 
@@ -189,7 +133,15 @@ export default function Assignment() {
           </section>
 
           <div className="assignments">
-            {SECTIONS.map((section) => {
+            {loading && <p className="assignments__loading">Loading assignments…</p>}
+            {error && (
+              <p className="assignments__error" role="alert">
+                Could not load assignments. Check public/school.json.
+              </p>
+            )}
+            {!loading &&
+              !error &&
+              SECTIONS.map((section) => {
               const items = bySection(section.id);
               const count = section.id === 'completed' ? completedCount : items.length;
 
@@ -225,7 +177,7 @@ export default function Assignment() {
                   )}
                 </section>
               );
-            })}
+              })}
           </div>
         </main>
       </div>
