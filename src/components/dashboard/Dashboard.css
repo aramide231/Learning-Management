@@ -20,7 +20,7 @@
 
 .dashboard__body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 230px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 270px);
   gap: 12px;
   padding-right: 11px;
   min-width: 0;
@@ -792,7 +792,7 @@
 .dashboard__aside {
   min-width: 0;
   width: 100%;
-  max-width: 230px;
+  max-width: 270px;
   padding: 12px 11px;
   display: grid;
   align-content: start;

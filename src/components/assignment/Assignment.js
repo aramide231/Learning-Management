@@ -24,7 +24,7 @@ const SECTIONS = [
 ];
 
 function AssignmentCard({ item }) {
-  const progress = getStoredProgress(item.id, item.progress);
+  const progress = getStoredProgress(item.id, 0);
 
   return (
     <Link to={`/assignments/${item.id}`} className="assignments__card-link">

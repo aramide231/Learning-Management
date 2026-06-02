@@ -42,7 +42,10 @@ export function getStoredProgress(assignmentId, defaultProgress = 0) {
 }
 
 export function countAnswered(answers, questionCount) {
-  return Math.min(questionCount, Object.keys(answers).length);
+  const answered = Object.values(answers).filter(
+    (value) => value != null && value !== '' && value !== '__initial__'
+  ).length;
+  return Math.min(questionCount, answered);
 }
 
 export function progressFromAnswers(answers, questionCount) {

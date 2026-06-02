@@ -1,39 +1,32 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import '../dashboard/Dashboard.css';
 import './AssignmentQuiz.css';
-import {
-  getAssignmentById,
-  getInitialCompletedCount,
-  QUESTION_COUNT,
-  useAssignments,
-} from '../../data/assignmentData';
+import { getAssignmentById, QUESTION_COUNT, useAssignments } from '../../data/assignmentData';
 import {
   loadAssignmentSession,
   progressFromAnswers,
   saveAssignmentSession,
-  seedInitialAnswers,
 } from '../../data/assignmentProgress';
 
-function initAnswers(assignmentId, questions, initialCompleted) {
+function initAnswers(assignmentId) {
   const saved = loadAssignmentSession(assignmentId);
   if (saved?.answers && typeof saved.answers === 'object') {
     return saved.answers;
   }
-  return seedInitialAnswers(questions, initialCompleted);
+  return {};
+}
+
+function isAnswered(answer) {
+  return answer != null && answer !== '' && answer !== '__initial__';
 }
 
 export default function AssignmentQuiz() {
   const { assignmentId } = useParams();
   const { assignments, loading, error } = useAssignments();
   const assignment = getAssignmentById(assignmentId, assignments);
-
-  const initialCompleted = useMemo(
-    () => (assignment ? getInitialCompletedCount(assignment.progress) : 0),
-    [assignment]
-  );
 
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,12 +37,12 @@ export default function AssignmentQuiz() {
       setInitialized(false);
       return;
     }
-    const initial = initAnswers(assignment.id, assignment.questions, initialCompleted);
+    const initial = initAnswers(assignment.id);
     setAnswers(initial);
-    const firstUnanswered = assignment.questions.findIndex((q) => !initial[q.id]);
+    const firstUnanswered = assignment.questions.findIndex((q) => !isAnswered(initial[q.id]));
     setCurrentIndex(firstUnanswered === -1 ? QUESTION_COUNT - 1 : Math.max(0, firstUnanswered));
     setInitialized(true);
-  }, [assignment, assignmentId, initialCompleted]);
+  }, [assignment, assignmentId]);
 
   const persistSession = useCallback(
     (nextAnswers) => {
@@ -128,7 +121,7 @@ export default function AssignmentQuiz() {
 
   const getQuestionState = (index) => {
     const qId = questions[index].id;
-    if (answers[qId]) {
+    if (isAnswered(answers[qId])) {
       return index === currentIndex ? 'answered-current' : 'answered';
     }
     if (index === currentIndex) return 'current';
@@ -175,7 +168,7 @@ export default function AssignmentQuiz() {
                         role="listitem"
                         className={`assignment-quiz__nav-cell assignment-quiz__nav-cell--${state}`}
                         aria-current={state === 'current' || state === 'answered-current' ? 'step' : undefined}
-                        aria-label={`Question ${q.id}${answers[q.id] ? ', answered' : ''}`}
+                        aria-label={`Question ${q.id}${isAnswered(answers[q.id]) ? ', answered' : ''}`}
                         onClick={() => goToQuestion(index)}
                       >
                         {q.id}

@@ -40,7 +40,8 @@
 /* Fixed card width from layout; auto-fill wraps 160px columns */
 .my-subjects__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, 176px);
+  grid-auto-rows: 144px;
   gap: 12px;
   margin-bottom: 22px;
   justify-content: start;
@@ -49,8 +50,12 @@
 .my-subjects__card {
   margin: 0;
   box-sizing: border-box;
-  width: 160px;
-  height: 128px;
+  width: 176px;
+  min-width: 176px;
+  max-width: 176px;
+  height: 144px;
+  min-height: 144px;
+  max-height: 144px;
   border-width: 0.5px;
   border-style: solid;
   border-color: #dfe3e8;
@@ -67,16 +72,16 @@
 
 .my-subjects__media {
   position: relative;
-  flex: 0 0 60px;
-  width: 160px;
-  height: 60px;
+  flex: 0 0 68px;
+  width: 176px;
+  height: 68px;
   background: #f1f5f9;
   overflow: hidden;
 }
 
 .my-subjects__image {
-  width: 160px;
-  height: 60px;
+  width: 176px;
+  height: 68px;
   object-fit: cover;
   display: block;
   opacity: 1;
@@ -118,8 +123,7 @@
 }
 
 .my-subjects__body {
-  
-  height: 68px;
+  height: 76px;
   padding: 4px 8px 5px;
   display: flex;
   flex-direction: column;
@@ -157,20 +161,20 @@
   margin-top: auto;
   align-self: flex-start;
   margin-left: 0;
-  width: 91px;
-  height: 17px;
-  min-height: 17px;
-  max-height: 17px;
+  width: 106px;
+  height: 22px;
+  min-height: 22px;
+  max-height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 2px 4px;
+  padding: 3px 6px;
   border: 0.5px solid #8e8e93;
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.102);
   font: inherit;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 600;
   line-height: 1;
   color: #374151;
@@ -185,9 +189,9 @@
 
 .my-subjects__download .material-symbols-outlined {
   flex-shrink: 0;
-  font-size: 9px;
-  width: 9px;
-  height: 9px;
+  font-size: 10px;
+  width: 10px;
+  height: 10px;
   font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
   color: #4b5563;
 }

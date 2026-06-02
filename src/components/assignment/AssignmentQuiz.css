@@ -176,7 +176,7 @@
 .assignment-quiz__question-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -209,11 +209,15 @@
 .assignment-quiz__question-subject {
   margin: 0;
   flex: 1;
-  text-align: center;
+  text-align: left;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: #111827;
+}
+
+.assignment-quiz__question-head .assignment-quiz__nav-btn:last-child {
+  margin-left: auto;
 }
 
 .assignment-quiz__question-label {

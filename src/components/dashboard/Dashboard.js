@@ -1,17 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { ResponsiveBar } from '@nivo/bar';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
 import './Dashboard.css';
 
 const RESOURCE_PHYSICS_IMAGE = `${process.env.PUBLIC_URL}/images/resource-physics-banner.png`;
@@ -113,8 +104,7 @@ const ANALYTICS_GRADES_FILL = '#111827';
 const ANALYTICS_ATTENDANCE_FILL = '#d1d5db';
 
 function AnalyticsBarTooltip({ active, payload }) {
-  if (!active || !payload?.length) return null;
-  const value = payload[0]?.value;
+  const value = payload?.value;
   if (value == null) return null;
   return (
     <div className="dashboard__analytics-tooltip">
@@ -329,53 +319,49 @@ export default function Dashboard() {
                   </header>
 
                   <div className="dashboard__analytics-chart">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        data={analyticsData}
-                        barGap={2}
-                        barCategoryGap="32%"
-                        margin={{ top: 12, right: 10, left: 0, bottom: 6 }}
-                      >
-                        <CartesianGrid
-                          strokeDasharray="4 4"
-                          stroke="#e5e7eb"
-                          horizontal
-                          vertical={false}
-                        />
-                        <XAxis
-                          dataKey="name"
-                          interval={0}
-                          tickLine={false}
-                          axisLine={false}
-                          tick={{ fontSize: 11, fill: '#9ca3af' }}
-                          dy={6}
-                        />
-                        <YAxis
-                          width={36}
-                          ticks={[0, 20, 40, 60, 80, 100]}
-                          domain={[0, 100]}
-                          tickLine={false}
-                          axisLine={false}
-                          tick={{ fontSize: 11, fill: '#9ca3af' }}
-                        />
-                        <Tooltip
-                          shared={false}
-                          cursor={{ fill: 'rgba(248, 250, 252, 0.75)' }}
-                          content={AnalyticsBarTooltip}
-                          wrapperStyle={{ outline: 'none' }}
-                        />
-                        <Bar dataKey="grades" radius={[4, 4, 0, 0]} barSize={5}>
-                          {analyticsData.map((entry) => (
-                            <Cell key={`${entry.name}-grades`} fill={ANALYTICS_GRADES_FILL} />
-                          ))}
-                        </Bar>
-                        <Bar dataKey="attendance" radius={[4, 4, 0, 0]} barSize={5}>
-                          {analyticsData.map((entry) => (
-                            <Cell key={`${entry.name}-attendance`} fill={ANALYTICS_ATTENDANCE_FILL} />
-                          ))}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
+                    <ResponsiveBar
+                      data={analyticsData}
+                      keys={['grades', 'attendance']}
+                      indexBy="name"
+                      groupMode="grouped"
+                      margin={{ top: 12, right: 10, bottom: 26, left: 36 }}
+                      padding={0.50}
+                      innerPadding={2}
+                      maxValue={100}
+                      colors={[ANALYTICS_GRADES_FILL, ANALYTICS_ATTENDANCE_FILL]}
+                      borderRadius={4}
+                      enableLabel={false}
+                      axisTop={null}
+                      axisRight={null}
+                      axisBottom={{
+                        tickSize: 0,
+                        tickPadding: 8,
+                        legend: '',
+                        legendOffset: 0,
+                      }}
+                      axisLeft={{
+                        tickSize: 0,
+                        tickPadding: 8,
+                        tickValues: [0, 20, 40, 60, 80, 100],
+                        legend: '',
+                        legendOffset: 0,
+                      }}
+                      gridYValues={[0, 20, 40, 60, 80, 100]}
+                      theme={{
+                        axis: {
+                          ticks: {
+                            text: { fontSize: 11, fill: '#9ca3af' },
+                          },
+                        },
+                        grid: {
+                          line: { stroke: '#e5e7eb', strokeDasharray: '4 4' },
+                        },
+                        tooltip: { container: { background: 'transparent', boxShadow: 'none' } },
+                      }}
+                      tooltip={(bar) => <AnalyticsBarTooltip payload={{ value: bar.value }} />}
+                      role="application"
+                      ariaLabel="Analytics bar chart"
+                    />
                   </div>
                 </article>
               </section>
