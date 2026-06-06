@@ -6,6 +6,9 @@ import MySubjects from './components/subjects/MySubjects';
 import Assignment from './components/assignment/Assignment';
 import AssignmentQuiz from './components/assignment/AssignmentQuiz';
 import Grades from './components/grades/Grades';
+import Resources from './components/resources/Resources';
+import ChatRoom from './components/chat/ChatRoom';
+import AiTutor from './components/ai-tutor/AiTutor';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/assignments" element={<Assignment />} />
         <Route path="/assignments/:assignmentId" element={<AssignmentQuiz />} />
         <Route path="/grades" element={<Grades />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/chat-room" element={<ChatRoom />} />
+        <Route path="/ai-tutor" element={<AiTutor />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

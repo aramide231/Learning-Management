@@ -9,6 +9,9 @@ const MAIN_NAV_PATHS = {
   subjects: '/subjects',
   assignment: '/assignments',
   grades: '/grades',
+  resources: '/resources',
+  'chat-room': '/chat-room',
+  'ai-tutor': '/ai-tutor',
 };
 
 const defaultSections = [
